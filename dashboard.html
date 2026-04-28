@@ -1,0 +1,3502 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direct Insight · Барби · Спальня · SEO Калининград</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237C5CFF'/%3E%3Cstop offset='1' stop-color='%23B794FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Ctext x='50' y='72' font-family='Inter,Arial,sans-serif' font-size='62' font-weight='800' text-anchor='middle' fill='white'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  /* ── DESIGN TOKENS ───────────────────────── */
+  :root {
+    --bg:           #faf8ff;
+    --bg-grad-1:    #f3edff;
+    --bg-grad-2:    #fff4f8;
+    --surface:      #ffffff;
+    --surface-2:    #f7f5fb;
+    --border:       #ece9f2;
+    --border-2:     #e0dceb;
+
+    --text:         #14111f;
+    --text-2:       #4b4760;
+    --text-3:       #8a85a3;
+    --text-4:       #b3afc5;
+
+    --primary:      #7C5CFF;
+    --primary-2:    #6644ff;
+    --primary-soft: #ede8ff;
+    --primary-wash: #f7f3ff;
+
+    --good:         #10b981;
+    --good-soft:    #d1fae5;
+    --good-wash:    #ecfdf5;
+    --bad:          #ef4444;
+    --bad-soft:     #fee2e2;
+    --bad-wash:     #fef2f2;
+    --warn:         #f59e0b;
+    --warn-soft:    #fef3c7;
+    --warn-wash:    #fffbeb;
+
+    /* placement / period palette */
+    --c-pink:       #f4a8c5;
+    --c-pink-soft:  #fbd5e3;
+    --c-blue:       #a8c4f5;
+    --c-blue-soft:  #d3e0f8;
+    --c-violet:     #c1b5f0;
+
+    /* campaign palette (used in compare tab) */
+    --c-barbie:     #7C5CFF;
+    --c-barbie-soft:#ede8ff;
+    --c-spalnya:    #14b8a6;
+    --c-spalnya-soft:#ccfbf1;
+    --c-spalnya-wash:#f0fdfa;
+
+    --radius-md:    12px;
+    --radius-lg:    16px;
+    --radius-xl:    20px;
+
+    --shadow-sm:    0 1px 2px rgba(80,68,128,0.04);
+    --shadow-md:    0 2px 8px rgba(80,68,128,0.06), 0 1px 2px rgba(80,68,128,0.04);
+    --shadow-lg:    0 8px 24px rgba(80,68,128,0.08), 0 2px 6px rgba(80,68,128,0.05);
+
+    --ease:         cubic-bezier(0.2, 0, 0, 1);
+    --dur:          200ms;
+
+    --topbar-h:     64px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  body {
+    background-image:
+      radial-gradient(ellipse 1100px 600px at 0% 0%, var(--bg-grad-1), transparent 60%),
+      radial-gradient(ellipse 900px 500px at 100% 0%, var(--bg-grad-2), transparent 60%);
+    min-height: 100vh;
+  }
+
+  ::selection { background: var(--primary-soft); color: var(--primary-2); }
+  button, input { font-family: inherit; }
+
+  /* ── TOPBAR ──────────────────────────────── */
+  .topbar {
+    height: var(--topbar-h);
+    padding: 0 32px;
+    display: flex; align-items: center; gap: 24px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(20px);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand .logo {
+    width: 32px; height: 32px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, var(--primary) 0%, #b794ff 100%);
+    color: white;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 14px;
+    box-shadow: 0 4px 10px rgba(124,92,255,0.3);
+  }
+  .brand .name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+  .brand .name span { color: var(--text-3); font-weight: 400; margin-left: 8px; }
+  .topbar .spacer { flex: 1; }
+  .topbar .period-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 12.5px; font-weight: 500; color: var(--text-2);
+    font-feature-settings: "tnum";
+    transition: all var(--dur) var(--ease);
+  }
+  .topbar .period-pill svg { width: 14px; height: 14px; color: var(--text-3); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 14px;
+    border-radius: 10px;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    transition: all var(--dur) var(--ease);
+    border: 1px solid transparent;
+    white-space: nowrap;
+    min-height: 38px;
+  }
+  .btn-ghost {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover { border-color: var(--border-2); background: var(--surface-2); }
+  .btn-ghost:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ── PAGE ──────────────────────────────── */
+  .page {
+    padding: 24px 32px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ── TAB NAV ────────────────────────────── */
+  .tab-nav {
+    display: flex;
+    gap: 2px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+    overflow-x: auto;
+  }
+  .tab-nav .tab {
+    padding: 12px 18px;
+    background: transparent;
+    border: none;
+    color: var(--text-3);
+    font-size: 14px; font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    display: inline-flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+    border-radius: 0;
+    letter-spacing: -0.005em;
+  }
+  .tab-nav .tab:hover { color: var(--text); }
+  .tab-nav .tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .tab-nav .tab .tab-meta {
+    font-size: 11.5px;
+    color: var(--text-4);
+    font-weight: 400;
+    font-feature-settings: "tnum";
+  }
+  .tab-nav .tab.active .tab-meta { color: var(--primary); opacity: 0.7; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── PAGE HEAD ──────────────────────────── */
+  .page-head { margin-bottom: 24px; }
+  .page-head h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+    display: inline-flex; align-items: center; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .page-head h1 .id {
+    font-size: 14px; font-weight: 500;
+    color: var(--text-3);
+    font-feature-settings: "tnum";
+    letter-spacing: 0;
+  }
+  .badge-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px;
+    background: var(--good-wash);
+    color: var(--good);
+    border-radius: 999px;
+    font-size: 12px; font-weight: 500;
+  }
+  .badge-status .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--good);
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.15);
+  }
+  .page-head .desc {
+    color: var(--text-2); font-size: 14.5px; margin: 0; max-width: 760px;
+    line-height: 1.55;
+  }
+  .page-head .desc b { font-weight: 600; color: var(--text); }
+
+  /* ── INSIGHT BANNER ─────────────────────── */
+  .insight {
+    margin-bottom: 16px;
+    padding: 18px 20px;
+    background: linear-gradient(95deg, var(--primary-wash) 0%, var(--bg-grad-2) 100%);
+    border: 1px solid var(--primary-soft);
+    border-radius: var(--radius-lg);
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .insight.teal {
+    background: linear-gradient(95deg, var(--c-spalnya-wash) 0%, var(--primary-wash) 100%);
+    border-color: var(--c-spalnya-soft);
+  }
+  .insight .ico {
+    width: 36px; height: 36px;
+    background: white;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    color: var(--primary);
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .insight.teal .ico { color: var(--c-spalnya); }
+  .insight .ico svg { width: 18px; height: 18px; }
+  .insight .text { flex: 1; color: var(--text-2); font-size: 14px; line-height: 1.55; }
+  .insight .text b { color: var(--text); font-weight: 600; }
+  .insight .text .pos { color: var(--good); font-weight: 600; }
+
+  /* ── CAVEAT NOTE ────────────────────────── */
+  .caveat {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: var(--warn-wash);
+    border: 1px solid var(--warn-soft);
+    border-radius: var(--radius-md);
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+  .caveat svg { flex-shrink: 0; margin-top: 1px; color: var(--warn); }
+  .caveat b { color: var(--text); font-weight: 600; }
+
+  /* ── KPI ────────────────────────────────── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 1100px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px)  { .kpi-row { grid-template-columns: 1fr; } }
+
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px 16px;
+    box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column;
+  }
+  .kpi-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .kpi-label { font-size: 13px; color: var(--text-3); font-weight: 500; }
+  .kpi-delta {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 8px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 600;
+    font-feature-settings: "tnum";
+  }
+  .kpi-delta.good { background: var(--good-wash); color: var(--good); }
+  .kpi-delta.bad  { background: var(--bad-wash);  color: var(--bad);  }
+  .kpi-delta svg { width: 11px; height: 11px; }
+  .kpi-value {
+    font-size: 30px; font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    line-height: 1.1;
+    font-feature-settings: "tnum";
+  }
+  .kpi-value .unit { font-size: 16px; font-weight: 500; color: var(--text-3); margin-left: 4px; }
+  .kpi-sub {
+    margin-top: 6px;
+    font-size: 12.5px; color: var(--text-3);
+    font-feature-settings: "tnum";
+  }
+  .kpi-sub b { color: var(--text-2); font-weight: 500; }
+  .kpi-spark { margin-top: 14px; height: 32px; width: 100%; }
+
+  /* ── CARDS ──────────────────────────────── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px; margin-bottom: 18px;
+  }
+  .card-title {
+    font-size: 15px; font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.005em;
+    margin: 0 0 4px;
+  }
+  .card-desc { color: var(--text-2); font-size: 13.5px; line-height: 1.5; margin: 0; }
+  .card-desc b { font-weight: 600; color: var(--text); font-feature-settings: "tnum"; }
+
+  .card-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 600;
+    font-feature-settings: "tnum";
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .card-tag.good { background: var(--good-wash); color: var(--good); }
+  .card-tag.bad  { background: var(--bad-wash);  color: var(--bad);  }
+  .card-tag.warn { background: var(--warn-wash); color: var(--warn); }
+  .card-tag.info { background: var(--primary-wash); color: var(--primary); }
+  .card-tag.teal { background: var(--c-spalnya-wash); color: var(--c-spalnya); }
+
+  /* ── GRID LAYOUTS ───────────────────────── */
+  .grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 16px; }
+  .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .grid-1-1 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .grid-1-1-1 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 1100px) {
+    .grid-1-2, .grid-2-1, .grid-1-1, .grid-1-1-1 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 1100px) and (min-width: 700px) {
+    .grid-1-1-1 { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── CHARTS ─────────────────────────────── */
+  .chart      { width: 100%; height: 260px; }
+  .chart.tall { height: 320px; }
+
+  .donut-wrap { display: flex; flex-direction: column; align-items: center; }
+  .donut-chart { width: 100%; height: 220px; }
+  .donut-legend {
+    display: flex; gap: 16px; margin-top: 4px;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .donut-legend .item {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text-2);
+  }
+  .donut-legend .dot { width: 8px; height: 8px; border-radius: 2px; }
+
+  .legend-pills { display: flex; gap: 16px; flex-wrap: wrap; }
+  .legend-pills .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text-2);
+    font-weight: 500;
+  }
+  .legend-pills .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ── CHART STATS FOOTER ─────────────────── */
+  .chart-stats {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .chart-stats .label {
+    font-size: 10.5px;
+    color: var(--text-4);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .chart-stats .row {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    font-size: 12px;
+    color: var(--text-2);
+    font-feature-settings: "tnum";
+  }
+  .chart-stats .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .chart-stats .pill::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    background: var(--c, var(--text-3));
+    flex-shrink: 0;
+  }
+  .chart-stats .pill b { color: var(--text); font-weight: 600; }
+  .chart-stats .pill .sep { color: var(--text-4); padding: 0 1px; }
+
+  /* ── PLACEMENT SHARE BARS ───────────────── */
+  .placement-hero { text-align: left; padding: 8px 0 18px; }
+  .placement-hero .num {
+    font-size: 44px; font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1;
+    font-feature-settings: "tnum";
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .placement-hero .num .arrow { color: var(--text-3); font-weight: 500; font-size: 28px; }
+  .placement-hero .num .to { color: var(--primary); }
+  .placement-hero .label {
+    font-size: 12.5px; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    font-weight: 500;
+    margin-top: 8px;
+  }
+
+  .share-bars { margin-top: 18px; display: flex; flex-direction: column; gap: 14px; }
+  .share-bar .head {
+    display: flex; justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 12px; color: var(--text-2); font-weight: 500;
+    font-feature-settings: "tnum";
+  }
+  .share-bar .head .lbl { color: var(--text-3); }
+  .share-bar-track {
+    display: flex; height: 28px;
+    background: var(--surface-2);
+    border-radius: 6px;
+    overflow: hidden; gap: 2px;
+  }
+  .seg {
+    display: flex; align-items: center; justify-content: flex-start;
+    padding: 0 10px;
+    font-size: 11.5px; font-weight: 600;
+    color: white;
+    font-feature-settings: "tnum";
+    white-space: nowrap; overflow: hidden;
+  }
+  .seg-spec  { background: var(--primary); }
+  .seg-other { background: var(--c-violet); color: var(--text); }
+
+  .placement-stats {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    font-size: 12.5px; color: var(--text-2);
+    line-height: 1.45;
+  }
+  .placement-stats .stat-label {
+    color: var(--text-3); font-size: 11.5px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .placement-stats b { color: var(--text); font-weight: 600; font-feature-settings: "tnum"; }
+
+  /* ── VS COMPARE CARDS ───────────────────── */
+  .vs-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column;
+  }
+  .vs-card .vs-title {
+    font-size: 13px; color: var(--text-3);
+    font-weight: 500;
+    margin: 0 0 14px;
+  }
+  .vs-card .vs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+  .vs-card .vs-divider-line {
+    background: var(--border);
+    height: 48px;
+    width: 1px;
+  }
+  .vs-card .vs-side {
+    display: flex; flex-direction: column;
+    gap: 4px;
+  }
+  .vs-card .vs-side.right { align-items: flex-end; text-align: right; }
+  .vs-card .vs-name {
+    font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .vs-card .vs-name.barbie  { color: var(--c-barbie); }
+  .vs-card .vs-name.spalnya { color: var(--c-spalnya); }
+  .vs-card .vs-value {
+    font-size: 24px; font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.05;
+    font-feature-settings: "tnum";
+  }
+  .vs-card .vs-value .unit {
+    font-size: 13px; font-weight: 500;
+    color: var(--text-3); margin-left: 3px;
+  }
+  .vs-card .vs-meta {
+    margin-top: 14px; padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 12.5px; color: var(--text-2);
+    line-height: 1.45;
+  }
+  .vs-card .vs-meta b { color: var(--text); font-weight: 600; font-feature-settings: "tnum"; }
+
+  /* ── HYPOTHESIS / CONCLUSION CARD ───────── */
+  .hyp-card {
+    background: linear-gradient(160deg, var(--c-spalnya-wash) 0%, var(--surface) 60%);
+    border: 1px solid var(--c-spalnya-soft);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    margin-top: 16px;
+  }
+  .hyp-card h3 {
+    margin: 0 0 6px; font-size: 16px; font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hyp-card h3 svg { color: var(--c-spalnya); flex-shrink: 0; }
+  .hyp-card .desc { color: var(--text-3); font-size: 13px; margin: 0 0 16px; }
+  .hyp-card .scenarios {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 760px) { .hyp-card .scenarios { grid-template-columns: 1fr; } }
+  .hyp-card .scenario {
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+  .hyp-card .scenario .num {
+    display: inline-block;
+    font-size: 11px; color: var(--c-spalnya);
+    background: var(--c-spalnya-wash);
+    padding: 2px 8px; border-radius: 999px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .hyp-card .scenario h4 {
+    margin: 0 0 6px; font-size: 14px; font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--text);
+  }
+  .hyp-card .scenario p {
+    margin: 0; font-size: 13px; color: var(--text-2); line-height: 1.5;
+  }
+  .hyp-card .scenario p b { color: var(--text); font-weight: 600; }
+  .hyp-card .test-line {
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--c-spalnya-soft);
+    border-radius: var(--radius-md);
+    font-size: 13.5px; color: var(--text);
+    line-height: 1.55;
+  }
+  .hyp-card .test-line b { color: var(--c-spalnya); font-weight: 600; }
+
+  /* ── TABLE ──────────────────────────────── */
+  .table-card { padding: 0; overflow: hidden; }
+  .table-head { padding: 18px 22px; border-bottom: 1px solid var(--border); }
+  .table-head h3 {
+    margin: 0 0 4px; font-size: 15px; font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .table-head .count {
+    background: var(--primary-soft); color: var(--primary);
+    padding: 2px 9px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 600;
+  }
+  .table-head .desc { font-size: 12.5px; color: var(--text-3); margin: 0; }
+
+  table.data { width: 100%; border-collapse: collapse; font-size: 13px; font-feature-settings: "tnum"; }
+  table.data thead th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 11px; font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  table.data thead th:first-child { padding-left: 22px; }
+  table.data thead th:last-child  { padding-right: 22px; }
+  table.data tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+  }
+  table.data tbody td:first-child { padding-left: 22px; }
+  table.data tbody td:last-child  { padding-right: 22px; }
+  table.data tbody tr:last-child td { border-bottom: none; }
+  table.data .num { font-weight: 500; font-feature-settings: "tnum"; text-align: right; }
+  table.data .num.muted { color: var(--text-2); font-weight: 400; }
+  table.data .day-cell { display: flex; align-items: center; gap: 12px; }
+  table.data .day-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    font-size: 11px; font-weight: 600;
+    font-feature-settings: "tnum";
+  }
+  table.data .day-icon.p1 { background: var(--c-pink-soft); color: #b8517a; }
+  table.data .day-icon.p2 { background: var(--c-blue-soft); color: #4476c4; }
+  table.data .day-name { font-weight: 500; color: var(--text); }
+  table.data .day-meta { font-size: 11.5px; color: var(--text-3); margin-top: 1px; }
+  table.data .stage-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 9px; border-radius: 999px;
+    font-size: 11px; font-weight: 500;
+  }
+  table.data .stage-badge.p1 { background: var(--c-pink-soft); color: #b8517a; }
+  table.data .stage-badge.p2 { background: var(--c-blue-soft); color: #4476c4; }
+
+  /* ── QUERIES TABLE ──────────────────────── */
+  table.queries td.q-cell {
+    max-width: 360px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  table.queries td.q-rank {
+    color: var(--text-3);
+    font-weight: 600;
+    font-size: 12px;
+    width: 36px;
+    text-align: center;
+    font-feature-settings: "tnum";
+  }
+  table.queries .bar-cell { width: 90px; }
+  table.queries .bar {
+    display: block; height: 6px;
+    background: var(--surface-2);
+    border-radius: 3px; overflow: hidden;
+    margin-top: 4px;
+  }
+  table.queries .bar-fill { display: block; height: 100%; background: var(--primary); border-radius: 3px; }
+  table.queries .cpc-high { color: var(--bad); font-weight: 600; }
+
+  /* ── SECTION TITLE ──────────────────────── */
+  .section-title {
+    font-size: 18px; font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 32px 0 16px;
+    color: var(--text);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::before {
+    content: '';
+    width: 3px; height: 18px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+  .section-title .meta {
+    font-size: 12.5px; color: var(--text-3);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  /* ── SEO BLOCK ──────────────────────────── */
+  .seo-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 14px;
+  }
+  .seo-block .head {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .seo-block .num {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--primary), #b794ff);
+    color: white;
+    border-radius: 10px;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 16px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(124,92,255,0.25);
+  }
+  .seo-block h3 {
+    margin: 0; font-size: 17px; font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--text);
+  }
+  .seo-block .subtitle {
+    font-size: 12px; color: var(--text-3);
+    margin-top: 3px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .seo-block .why {
+    background: var(--primary-wash);
+    border-left: 3px solid var(--primary);
+    padding: 14px 16px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 20px;
+    color: var(--text-2);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .seo-block .why .term {
+    color: var(--primary);
+    font-weight: 600;
+    font-style: italic;
+    white-space: nowrap;
+  }
+  .seo-block .why b { color: var(--text); font-weight: 600; }
+  .seo-block h4 {
+    font-size: 12px; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    font-weight: 500;
+    margin: 18px 0 10px;
+  }
+  .seo-block h4:first-of-type { margin-top: 0; }
+  .seo-block .what-text {
+    margin: 0 0 14px;
+    font-size: 13.5px;
+    color: var(--text-2);
+    line-height: 1.55;
+  }
+  .seo-block .what-text:last-child { margin-bottom: 0; }
+  .seo-block .what-text b { color: var(--text); font-weight: 600; }
+
+  /* ── SEO ARTICLES LIST ──────────────────── */
+  .seo-articles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 800px) { .seo-articles { grid-template-columns: 1fr; } }
+  .seo-article {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    background: var(--surface-2);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all var(--dur) var(--ease);
+  }
+  .seo-article:hover {
+    background: var(--primary-wash);
+    border-color: var(--primary-soft);
+    color: var(--primary);
+  }
+  .seo-article .num-art {
+    color: var(--text-4);
+    font-weight: 600;
+    font-size: 11px;
+    min-width: 18px;
+    font-feature-settings: "tnum";
+  }
+  .seo-article:hover .num-art { color: var(--primary); }
+  .seo-article .title { flex: 1; }
+  .seo-article .ext {
+    width: 14px; height: 14px;
+    color: var(--text-4);
+    flex-shrink: 0;
+  }
+  .seo-article:hover .ext { color: var(--primary); }
+
+  /* ── PAGESPEED RING SCORES ──────────────── */
+  .pagespeed-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  @media (max-width: 700px) { .pagespeed-grid { grid-template-columns: repeat(2, 1fr); } }
+  .ps-score {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 14px 12px;
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+  .ps-ring {
+    width: 64px; height: 64px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .ps-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .ps-ring .ring-bg { fill: none; stroke: rgba(0,0,0,0.06); stroke-width: 6; }
+  .ps-ring .ring-fill { fill: none; stroke-width: 6; stroke-linecap: round; }
+  .ps-ring .num {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 18px;
+    color: var(--text);
+    font-feature-settings: "tnum";
+  }
+  .ps-score .label {
+    font-size: 11.5px; color: var(--text-2);
+    font-weight: 500;
+    line-height: 1.3;
+    margin-top: 4px;
+  }
+
+  /* ── CORE WEB VITALS ────────────────────── */
+  .cwv-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 800px) { .cwv-grid { grid-template-columns: repeat(2, 1fr); } }
+  .cwv-item {
+    padding: 12px 14px;
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--good);
+  }
+  .cwv-item .name {
+    font-size: 11px; color: var(--text-3);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .cwv-item .name .desc {
+    color: var(--text-3); text-transform: none;
+    letter-spacing: 0; font-weight: 400;
+    font-size: 11px;
+    display: block;
+    margin-top: 1px;
+  }
+  .cwv-item .val {
+    font-size: 18px; font-weight: 600;
+    color: var(--text);
+    margin-top: 6px;
+    font-feature-settings: "tnum";
+    letter-spacing: -0.02em;
+  }
+  .cwv-item .val .unit {
+    font-size: 12px; color: var(--text-3);
+    font-weight: 500;
+    margin-left: 2px;
+  }
+  .cwv-item .target {
+    font-size: 10.5px; color: var(--good);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  /* ── DONOR CARDS ────────────────────────── */
+  .donor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 900px) { .donor-grid { grid-template-columns: 1fr; } }
+  .donor-card {
+    padding: 16px 18px;
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+  }
+  .donor-card .name {
+    font-size: 16px; font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: -0.005em;
+    font-family: ui-monospace, 'SF Mono', monospace;
+  }
+  .donor-card .donor-desc {
+    font-size: 12px; color: var(--text-3);
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+  .donor-card .metrics {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 12px;
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    background: var(--surface);
+    border-radius: 8px;
+    font-feature-settings: "tnum";
+  }
+  .donor-card .m {
+    display: flex; justify-content: space-between;
+    font-size: 12px;
+  }
+  .donor-card .m .lbl { color: var(--text-3); }
+  .donor-card .m .val { color: var(--text); font-weight: 600; }
+  .donor-card .m .val.good { color: var(--good); }
+  .donor-card .placement-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: auto;
+    padding-top: 4px;
+  }
+  .donor-card .placement-link:hover { text-decoration: underline; }
+  .donor-card .placement-link svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+  /* ── PAGESPEED SCREENSHOTS ──────────────── */
+  .ps-screenshot {
+    margin: 0 0 16px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: white;
+    box-shadow: var(--shadow-sm);
+  }
+  .ps-screenshot:last-child { margin-bottom: 0; }
+  .ps-screenshot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* ── POSITIONS — GAINERS TABLE ──────────── */
+  table.gainers {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    font-feature-settings: "tnum";
+  }
+  table.gainers thead th {
+    text-align: left;
+    padding: 10px 16px;
+    font-size: 11px; font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+  }
+  table.gainers thead th:first-child { padding-left: 22px; }
+  table.gainers thead th:last-child  { padding-right: 22px; text-align: right; }
+  table.gainers tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: middle;
+  }
+  table.gainers tbody td:first-child { padding-left: 22px; }
+  table.gainers tbody td:last-child  { padding-right: 22px; }
+  table.gainers tbody tr:last-child td { border-bottom: none; }
+  table.gainers .q { font-weight: 500; max-width: 320px; }
+  table.gainers .system {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 2px 8px; border-radius: 999px;
+    font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  table.gainers .system.y {
+    background: rgba(245,158,11,0.12);
+    color: #b67517;
+  }
+  table.gainers .system.g {
+    background: var(--primary-wash);
+    color: var(--primary);
+  }
+  table.gainers .pos-shift {
+    text-align: right;
+    font-feature-settings: "tnum";
+    color: var(--text);
+    font-weight: 500;
+  }
+  table.gainers .pos-shift .from {
+    color: var(--text-3);
+  }
+  table.gainers .pos-shift .arrow {
+    color: var(--text-4);
+    margin: 0 4px;
+  }
+  table.gainers .pos-shift .to {
+    color: var(--good);
+    font-weight: 700;
+  }
+  table.gainers .pos-shift .to-bad { color: var(--text-2); }
+  table.gainers .gain {
+    text-align: right;
+    color: var(--good);
+    font-weight: 700;
+    font-feature-settings: "tnum";
+  }
+
+  /* ── PLACEHOLDER WAIT ───────────────────── */
+  .placeholder-wait {
+    padding: 36px 24px;
+    text-align: center;
+    color: var(--text-3);
+    background: var(--surface);
+    border: 1px dashed var(--border-2);
+    border-radius: var(--radius-md);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .placeholder-wait svg {
+    width: 36px; height: 36px;
+    color: var(--text-4);
+    margin-bottom: 12px;
+  }
+  .placeholder-wait b { color: var(--text); font-weight: 600; }
+  .placeholder-wait p { margin: 0 0 6px; }
+  .placeholder-wait p:last-child { margin: 0; font-size: 12.5px; }
+
+  /* ── FOOTER ─────────────────────────────── */
+  footer.fnotes {
+    margin-top: 28px;
+    padding: 18px 22px 0;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 32px;
+    font-size: 12px;
+    color: var(--text-3);
+    line-height: 1.5;
+  }
+  @media (max-width: 760px) { footer.fnotes { grid-template-columns: 1fr; } }
+  footer.fnotes p { margin: 0; }
+  footer.fnotes sup { color: var(--primary); font-weight: 600; margin-right: 3px; }
+  footer.fnotes .meta {
+    grid-column: 1 / -1;
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    color: var(--text-4);
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+    font-size: 11.5px;
+  }
+  footer.fnotes code { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--text-2); }
+
+  /* ════════════════════════════════════════════ */
+  /* ═══  MOBILE-FIRST FLUID OVERRIDES  ═══════ */
+  /* ════════════════════════════════════════════ */
+  /* Fluid tokens applied to existing selectors via overrides.
+     Strategy: clamp() for natural scaling + 2 explicit breakpoints (768/480) for adjustments. */
+
+  /* Fluid containers and typography (apply universally) */
+  .page                { padding: clamp(20px, 4vw, 32px) clamp(14px, 4vw, 32px) clamp(40px, 8vw, 60px); }
+  .topbar              { padding: 0 clamp(14px, 4vw, 32px); gap: clamp(12px, 2vw, 24px); }
+  .card                { padding: clamp(16px, 3vw, 22px); }
+  .kpi                 { padding: clamp(14px, 3vw, 20px); padding-bottom: 16px; }
+  .kpi-value           { font-size: clamp(24px, 5vw, 30px); }
+  .page-head h1        { font-size: clamp(22px, 4.5vw, 28px); }
+  .section-title       { font-size: clamp(16px, 3.5vw, 18px); }
+  .seo-block           { padding: clamp(18px, 3vw, 24px); }
+  .vs-card .vs-value   { font-size: clamp(20px, 4vw, 24px); }
+  .placement-hero .num { font-size: clamp(32px, 7vw, 44px); }
+  .premium .big        { font-size: clamp(36px, 7vw, 48px); }
+  .insight             { padding: clamp(14px, 2.5vw, 20px); }
+  .caveat              { padding: clamp(10px, 2vw, 14px) clamp(12px, 2.5vw, 16px); }
+  .chart               { height: clamp(220px, 32vw, 260px); }
+  .chart.tall          { height: clamp(260px, 40vw, 340px); }
+  .donut-chart         { height: clamp(200px, 30vw, 240px); }
+
+  /* Touch targets — WCAG / Material 48dp / Apple HIG 44pt */
+  .btn                  { min-height: 44px; }
+  .tab-nav .tab         { min-height: 48px; padding: 12px 16px; }
+
+  /* Tab nav — modern horizontal scroll with scroll-snap */
+  .tab-nav {
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-nav .tab {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  /* ── Tablet (≤ 768px) — phone landscape and small tablets ── */
+  @media (max-width: 768px) {
+    .topbar                       { gap: 10px; }
+    .brand .name span             { display: none; }                /* hide brand subtitle */
+    .topbar .period-pill          { padding: 6px 10px; font-size: 11.5px; }
+    .topbar .period-pill svg      { display: none; }
+    .tab-nav                      { gap: 0; }
+    .tab-nav .tab                 { padding: 12px 14px; font-size: 13.5px; }
+    .tab-nav .tab .tab-meta       { display: none; }                /* drop secondary meta */
+    .insight .ico                 { width: 32px; height: 32px; }
+    .insight .ico svg             { width: 16px; height: 16px; }
+    .seo-block .head              { gap: 10px; }
+    .seo-block .num               { width: 32px; height: 32px; font-size: 14px; }
+    .seo-block h3                 { font-size: 16px; }
+    .seo-block .why               { padding: 12px 14px; font-size: 13px; }
+    .ps-screenshot                { margin-bottom: 12px; }
+    .table-head                   { padding: 14px 16px; }
+    table.data thead th,
+    table.data tbody td           { padding: 10px 12px; font-size: 12.5px; }
+    table.data thead th:first-child,
+    table.data tbody td:first-child { padding-left: 16px; }
+    table.data thead th:last-child,
+    table.data tbody td:last-child  { padding-right: 16px; }
+    table.data .day-icon          { width: 28px; height: 28px; font-size: 10px; }
+    footer.fnotes                 { padding: 14px 16px 0; gap: 6px 24px; }
+    .donor-card                   { padding: 14px 16px; }
+    .premium                      { padding: 18px 18px; }
+    .next-steps                   { padding: 18px 18px; }
+    .hyp-card                     { padding: 18px 20px; }
+  }
+
+  /* ── Phone (≤ 480px) — small phones portrait ── */
+  @media (max-width: 480px) {
+    .topbar                       { height: 56px; }
+    .topbar .period-pill          { display: none; }                /* fully drop period pill */
+    .brand .logo                  { width: 28px; height: 28px; font-size: 12px; }
+    .brand .name                  { font-size: 13px; }
+    .btn                          { padding: 10px 12px; font-size: 12.5px; }
+    .btn svg                      { width: 14px; height: 14px; }
+    .page                         { padding-top: 18px; }
+    .badge-status                 { padding: 3px 8px; font-size: 11px; }
+    .page-head h1                 { gap: 8px; }
+    .page-head h1 .id             { font-size: 12px; }
+    .insight .text                { font-size: 13px; }
+    .caveat                       { font-size: 12.5px; }
+    .kpi-spark                    { height: 24px; margin-top: 10px; }
+    .kpi-value                    { font-size: 22px; }
+    .kpi-value .unit              { font-size: 13px; }
+    .kpi-sub                      { font-size: 12px; }
+    .donut-legend                 { gap: 12px; }
+    .donut-legend .item           { font-size: 11px; }
+    .legend-pills                 { gap: 10px; }
+    .legend-pills .pill           { font-size: 11px; }
+    .card-title                   { font-size: 14px; }
+    .card-desc                    { font-size: 12.5px; }
+    .card-tag                     { font-size: 10.5px; padding: 3px 8px; }
+    .vs-card .vs-grid             { gap: 8px; }
+    .vs-card .vs-divider-line     { height: 36px; }
+    .seo-articles                 { gap: 6px; }
+    .seo-article                  { padding: 10px; font-size: 12.5px; }
+    .ps-ring                      { width: 56px; height: 56px; }
+  }
+
+  /* ── PRINT ──────────────────────────────── */
+  @media print {
+    body { background: white; }
+    .topbar, .btn-ghost, .tab-nav { display: none !important; }
+    .page { padding: 12px; max-width: none; }
+    .tab-panel { display: block !important; page-break-before: always; }
+    .tab-panel:first-of-type { page-break-before: auto; }
+    .card, .insight, .kpi, .vs-card, .hyp-card, .caveat { box-shadow: none; break-inside: avoid; }
+    .grid-1-2, .grid-2-1, .grid-1-1, .kpi-row { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── TOPBAR ──────────────────────────────── -->
+<header class="topbar">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">D</div>
+    <div class="name">Direct Insight<span>аналитика контекстной рекламы</span></div>
+  </div>
+  <div class="spacer"></div>
+  <div class="period-pill" id="period-pill" aria-label="Период наблюдения">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+    <span id="period-text">25.03 — 22.04.2026 · 29 дней</span>
+  </div>
+  <button class="btn btn-ghost" onclick="window.print()" aria-label="Распечатать отчёт">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="9" rx="2"/><path d="M6 14h12v7H6z"/></svg>
+    Печать
+  </button>
+</header>
+
+<!-- ── PAGE ────────────────────────────────── -->
+<div class="page">
+
+  <!-- TABS -->
+  <nav class="tab-nav" role="tablist">
+    <button class="tab active" role="tab" data-tab="strategy" aria-selected="true">
+      Стратегия Барби
+      <span class="tab-meta">Красноярск · 25.03 — 22.04</span>
+    </button>
+    <button class="tab" role="tab" data-tab="compare" aria-selected="false">
+      Барби vs Спальня
+      <span class="tab-meta">Красноярск · апрель</span>
+    </button>
+    <button class="tab" role="tab" data-tab="kaliningrad" aria-selected="false">
+      Поиск — Калининград
+      <span class="tab-meta">апрель</span>
+    </button>
+    <button class="tab" role="tab" data-tab="seo" aria-selected="false">
+      SEO — barbie-salon.ru
+      <span class="tab-meta">первый месяц</span>
+    </button>
+  </nav>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- ═══  TAB 1: STRATEGY (Barbie alone) ═══ -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="tab-panel active" data-panel="strategy">
+
+    <header class="page-head">
+      <h1>
+        Барби
+        <span class="id">ID 94 848 572</span>
+        <span class="badge-status"><span class="dot"></span>Активна</span>
+      </h1>
+      <p class="desc">
+        Окупилась ли смена стратегии 8 апреля? Сравнение 14 дней <b>до</b> переключения на ручное управление со сниженными ставками
+        и 15 дней <b>после</b>.
+      </p>
+    </header>
+
+    <div class="insight" role="region" aria-label="Главный вывод">
+      <div class="ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 13c1 .8 1 1.5 1 3h6c0-1.5 0-2.2 1-3a7 7 0 00-4-13z"/></svg>
+      </div>
+      <div class="text">
+        <b>Смена стратегии оправдана.</b> Сэкономили <span class="pos">50% бюджета</span> при росте кликов на 42% и удвоении охвата.
+        Клик стал дешевле в 2,8 раза. <b>Рекомендуем оставить ручное управление.</b>
+      </div>
+    </div>
+
+    <div class="caveat">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <div>
+        <b>Оговорка о данных:</b>
+        все метрики в этом отчёте — верхняя воронка (показы, клики, охват). Данных о конверсиях из Метрики в выгрузке нет —
+        окупились ли сэкономленные деньги в продажах, по этим цифрам сказать нельзя. Рекомендуем подключить цели Метрики к кампании.
+      </div>
+    </div>
+
+    <!-- KPI ROW -->
+    <div class="kpi-row">
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Расход</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10M17 7v10H7"/></svg>
+            −49,9%
+          </span>
+        </div>
+        <div class="kpi-value">65&nbsp;863<span class="unit">₽</span></div>
+        <div class="kpi-sub">было <b>131&nbsp;425&nbsp;₽</b> · экономия <b>65&nbsp;562&nbsp;₽</b></div>
+        <div class="kpi-spark" id="sp-spend" aria-hidden="true"></div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Клики</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +41,9%
+          </span>
+        </div>
+        <div class="kpi-value">227</div>
+        <div class="kpi-sub">было <b>160</b> · +67 кликов за 15 дней</div>
+        <div class="kpi-spark" id="sp-clicks" aria-hidden="true"></div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Охват уникальных</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +106,1%
+          </span>
+        </div>
+        <div class="kpi-value">1&nbsp;074</div>
+        <div class="kpi-sub">было <b>521</b> · +553 уникальных пользователя</div>
+        <div class="kpi-spark" id="sp-reach" aria-hidden="true"></div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Цена клика</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7l10 10M17 7v10H7"/></svg>
+            −64,7%
+          </span>
+        </div>
+        <div class="kpi-value">290<span class="unit">₽</span></div>
+        <div class="kpi-sub">было <b>821&nbsp;₽</b> · клик в 2,8 раза дешевле</div>
+        <div class="kpi-spark" id="sp-cpc" aria-hidden="true"></div>
+      </div>
+
+    </div>
+
+    <!-- DONUT + TIMELINE -->
+    <div class="grid-1-2">
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Бюджет: вдвое меньше</h3>
+            <p class="card-desc">Дневной расход <b>9 388 ₽ → 4 391 ₽</b>. За 15 дней нового режима потратили столько же, сколько за 7 дней старого.</p>
+          </div>
+        </div>
+        <div class="donut-wrap">
+          <div class="donut-chart" id="chart-donut" aria-label="Распределение бюджета: P1 131 425 ₽ против P2 65 863 ₽"></div>
+          <div class="donut-legend">
+            <span class="item"><span class="dot" style="background: var(--c-pink)"></span>P1 · автостратегия · 14 дн.</span>
+            <span class="item"><span class="dot" style="background: var(--c-blue)"></span>P2 · ручное · 15 дн.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Хронология: что и когда поменялось</h3>
+            <p class="card-desc">8 апреля столбцы расхода резко падают, но линия кликов <b>продолжает расти</b> — главное наблюдение этого отчёта.</p>
+          </div>
+          <div class="legend-pills">
+            <span class="pill"><span class="dot" style="background: var(--c-pink)"></span>Расход P1</span>
+            <span class="pill"><span class="dot" style="background: var(--c-blue)"></span>Расход P2</span>
+            <span class="pill"><span class="dot" style="background: var(--primary)"></span>Клики</span>
+          </div>
+        </div>
+        <div class="chart tall" id="chart-main" aria-label="Дневная динамика расхода и кликов"></div>
+      </div>
+    </div>
+
+    <!-- AUCTION 2x2 -->
+    <div class="grid-1-1">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Цена клика — главный выигрыш</h3>
+            <p class="card-desc">7 апреля платили <b>1 102 ₽</b> за клик, 8 апреля — уже <b>595 ₽</b>. Средний CPC в P2 в <b>2,8 раза дешевле</b>.</p>
+          </div>
+          <span class="card-tag good">×2,8 дешевле</span>
+        </div>
+        <div class="chart" id="chart-cpc" aria-label="Цена клика по дням"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Позиция: цена экономии</h3>
+            <p class="card-desc">При сниженных ставках реклама сместилась со 2-й на 3,5-ю позицию. Это <b>ожидаемо</b> и заложено в план.</p>
+          </div>
+          <span class="card-tag info">+1,46 поз.</span>
+        </div>
+        <div class="chart" id="chart-pos" aria-label="Средняя позиция показа по дням"></div>
+      </div>
+    </div>
+
+    <div class="grid-1-1">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">CTR упал — это не падение качества</h3>
+            <p class="card-desc">CTR с 22% до 13% — следствие того, что позиция стала ниже. Креативы и аудитория те же; меньше людей видят рекламу <b>первой</b>.</p>
+          </div>
+          <span class="card-tag info">−9 п.п.</span>
+        </div>
+        <div class="chart" id="chart-ctr" aria-label="CTR по дням"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Доля выигранных аукционов</h3>
+            <p class="card-desc">«Объём трафика» — косвенная метрика доли выигрышей<sup style="color: var(--primary);">⁴</sup>. Упал со 100 до 62 — теперь ловим <b>61% доступного трафика</b> вместо 100%.</p>
+          </div>
+          <span class="card-tag info">−39%</span>
+        </div>
+        <div class="chart" id="chart-traffic" aria-label="Объём трафика по дням"></div>
+      </div>
+    </div>
+
+    <!-- PLACEMENT SECTION -->
+    <div class="grid-1-2">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Где показывались: меньше «премиума», больше «прочего»</h3>
+            <p class="card-desc">«Спецразмещение» — рекламный блок над выдачей (премиум). «Прочее» — гарантированные показы внизу страницы и сети.</p>
+          </div>
+          <span class="card-tag info">−34 п.п.</span>
+        </div>
+
+        <div class="placement-hero">
+          <div class="num">82%<span class="arrow">→</span><span class="to">47%</span></div>
+          <div class="label">доля спецразмещения</div>
+        </div>
+
+        <div class="share-bars">
+          <div class="share-bar">
+            <div class="head">
+              <span class="lbl">P1 · до 8 апреля</span>
+              <span>596 показов в спец. · 134 в прочих</span>
+            </div>
+            <div class="share-bar-track">
+              <div class="seg seg-spec"  style="width: 81.6%;">Спец 81,6%</div>
+              <div class="seg seg-other" style="width: 18.4%;">18,4%</div>
+            </div>
+          </div>
+          <div class="share-bar">
+            <div class="head">
+              <span class="lbl">P2 · с 8 апреля</span>
+              <span>823 в спец. · 922 в прочих</span>
+            </div>
+            <div class="share-bar-track">
+              <div class="seg seg-spec"  style="width: 47.2%;">Спец 47,2%</div>
+              <div class="seg seg-other" style="width: 52.8%;">Прочее 52,8%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placement-stats">
+          <div>
+            <div class="stat-label">Спецразмещение</div>
+            <div>596 → <b>823</b> показов <b style="color: var(--good);">+38%</b></div>
+          </div>
+          <div>
+            <div class="stat-label">Прочие позиции</div>
+            <div>134 → <b>922</b> показов <b style="color: var(--good);">+588%</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Откуда пришли дополнительные показы</h3>
+            <p class="card-desc">
+              Из 1 015 дополнительных показов после 8 апреля <b>78% пришло из «прочего»</b> — гарантированных показов внизу страницы и сетей.
+              В премиум-блоке мы <b>не</b> исчезли — показались даже больше, но рост в основном за счёт нижних позиций.
+            </p>
+          </div>
+          <div class="legend-pills">
+            <span class="pill"><span class="dot" style="background: var(--primary)"></span>Спецразмещение</span>
+            <span class="pill"><span class="dot" style="background: var(--c-violet)"></span>Прочее</span>
+          </div>
+        </div>
+        <div class="chart tall" id="chart-placement" aria-label="Структура показов по дням"></div>
+      </div>
+    </div>
+
+    <!-- DAILY TABLE -->
+    <div class="card table-card">
+      <div class="table-head">
+        <h3>Дневная сводка <span class="count">29</span></h3>
+        <p class="desc">Все дни наблюдения — для самостоятельной проверки</p>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>День</th>
+              <th>Стратегия</th>
+              <th style="text-align: right;">Расход, ₽</th>
+              <th style="text-align: right;">Показы</th>
+              <th style="text-align: right;">в т.ч. спец.</th>
+              <th style="text-align: right;">Клики</th>
+              <th style="text-align: right;">CPC, ₽</th>
+              <th style="text-align: right;">Поз.</th>
+              <th style="text-align: right;">CTR, %</th>
+              <th style="text-align: right;">Охват</th>
+            </tr>
+          </thead>
+          <tbody id="daily-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer class="fnotes">
+      <p><sup>¹</sup> Общий расход двух кампаний рекламодателя за период: 484 366,17 ₽. На «Барби» приходится 197 288,48 ₽ (~40,7%).</p>
+      <p><sup>²</sup> Цена уникального пользователя — суммарный расход ÷ суммарный охват за период. Не путать с CPA: данных Метрики о целевых действиях в выгрузке нет.</p>
+      <p><sup>³</sup> «Средняя позиция» и «Объём трафика» в сравнениях периодов взвешены по показам, а не усреднены арифметически по дням.</p>
+      <p><sup>⁴</sup> «Объём трафика» в Яндекс.Директе — характеристика занимаемого блока (>100 = премиум, <100 = гарантированные показы или сети). Колонка «Прогноз доли выигрышей, %» в выгрузке пуста.</p>
+      <p><sup>⁵</sup> «Спецразмещение» — рекламный блок над органической выдачей (3–4 позиции в верху страницы, ≈ 85% всех кликов на поиске). «Прочее» — гарантированные показы внизу выдачи и показы в РСЯ.</p>
+      <p><sup>⁶</sup> 28 марта зафиксирован 1 показ в категории «Эксклюзивное размещение» — статистический шум, в расчётах долей включён в «прочее».</p>
+      <div class="meta">
+        <span>Источники: <code>базовый отчет.csv</code>, <code>вид размещения.csv</code> · Яндекс.Директ</span>
+        <span>Подготовлено: 28.04.2026</span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- ═══  TAB 2: COMPARE (Barbie vs Spalnya) ═══ -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="tab-panel" data-panel="compare">
+
+    <header class="page-head">
+      <h1>
+        Барби <span style="color: var(--text-3); font-weight: 400;">vs</span> Спальня
+      </h1>
+    </header>
+
+    <div class="insight teal" role="region" aria-label="Главный вывод сравнения">
+      <div class="ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="7" cy="6" r="2.5" fill="white"/><circle cx="15" cy="12" r="2.5" fill="white"/><circle cx="10" cy="18" r="2.5" fill="white"/></svg>
+      </div>
+      <div class="text">
+        <b>Спальня покупает позицию, не клики.</b> За дополнительные <b>107 тыс. ₽ в апреле</b> (+72% к бюджету Барби)
+        она держит позицию выше на <b>1 строку</b> и в <b>1,3 раза чаще</b> попадает в премиум-блок над выдачей.
+        Но в абсолютах получает <b>меньше</b>: −38% показов, −30% охвата, и даже немного меньше кликов.
+      </div>
+    </div>
+
+    <!-- VS COMPARE CARDS -->
+    <div class="kpi-row">
+
+      <div class="vs-card">
+        <h4 class="vs-title">Цена клика, ₽</h4>
+        <div class="vs-grid">
+          <div class="vs-side">
+            <div class="vs-name barbie">Барби</div>
+            <div class="vs-value">403<span class="unit">₽</span></div>
+          </div>
+          <div class="vs-divider-line"></div>
+          <div class="vs-side right">
+            <div class="vs-name spalnya">Спальня</div>
+            <div class="vs-value">733<span class="unit">₽</span></div>
+          </div>
+        </div>
+        <div class="vs-meta">Спальня платит за клик <b>×1,8 дороже</b> (+82%)</div>
+      </div>
+
+      <div class="vs-card">
+        <h4 class="vs-title">Средняя позиция</h4>
+        <div class="vs-grid">
+          <div class="vs-side">
+            <div class="vs-name barbie">Барби</div>
+            <div class="vs-value">3,35</div>
+          </div>
+          <div class="vs-divider-line"></div>
+          <div class="vs-side right">
+            <div class="vs-name spalnya">Спальня</div>
+            <div class="vs-value">2,49</div>
+          </div>
+        </div>
+        <div class="vs-meta">Спальня держит позицию <b>выше на 0,86</b> (меньше = лучше)</div>
+      </div>
+
+      <div class="vs-card">
+        <h4 class="vs-title">Доля спецразмещения</h4>
+        <div class="vs-grid">
+          <div class="vs-side">
+            <div class="vs-name barbie">Барби</div>
+            <div class="vs-value">52<span class="unit">%</span></div>
+          </div>
+          <div class="vs-divider-line"></div>
+          <div class="vs-side right">
+            <div class="vs-name spalnya">Спальня</div>
+            <div class="vs-value">68<span class="unit">%</span></div>
+          </div>
+        </div>
+        <div class="vs-meta">Спальня в премиум-блоке <b>+16 п.п. чаще</b></div>
+      </div>
+
+      <div class="vs-card">
+        <h4 class="vs-title">Цена 1 уникального</h4>
+        <div class="vs-grid">
+          <div class="vs-side">
+            <div class="vs-name barbie">Барби</div>
+            <div class="vs-value">88<span class="unit">₽</span></div>
+          </div>
+          <div class="vs-divider-line"></div>
+          <div class="vs-side right">
+            <div class="vs-name spalnya">Спальня</div>
+            <div class="vs-value">216<span class="unit">₽</span></div>
+          </div>
+        </div>
+        <div class="vs-meta">Касание с пользователем у Спальни <b>×2,5 дороже</b></div>
+      </div>
+
+    </div>
+
+    <!-- SCATTER + PLACEMENT -->
+    <div class="grid-2-1">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Кривая «деньги → позиция»</h3>
+            <p class="card-desc">
+              Каждая точка — один день. Чем правее (CPC выше), тем выше позиция (точка выше). Спальня сидит правее и выше — это
+              <b>стабильное соотношение</b>, а не разовый скачок.
+            </p>
+          </div>
+          <div class="legend-pills">
+            <span class="pill"><span class="dot" style="background: var(--c-barbie)"></span>Барби</span>
+            <span class="pill"><span class="dot" style="background: var(--c-spalnya)"></span>Спальня</span>
+          </div>
+        </div>
+        <div class="chart tall" id="chart-scatter" aria-label="Точечная диаграмма CPC и позиции по дням для двух кампаний"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Где показывались за апрель</h3>
+            <p class="card-desc">Какая доля показов пришлась на премиум-блок над выдачей.</p>
+          </div>
+        </div>
+
+        <div class="share-bars">
+          <div class="share-bar">
+            <div class="head">
+              <span class="lbl"><span style="display:inline-block; width:8px; height:8px; background: var(--c-barbie); border-radius:50%; margin-right:6px;"></span>Барби · 2 720 показов</span>
+              <span>1 417 / 1 303</span>
+            </div>
+            <div class="share-bar-track">
+              <div class="seg seg-spec"  style="width: 52.1%;">Спец 52%</div>
+              <div class="seg seg-other" style="width: 47.9%;">Прочее 48%</div>
+            </div>
+          </div>
+          <div class="share-bar">
+            <div class="head">
+              <span class="lbl"><span style="display:inline-block; width:8px; height:8px; background: var(--c-spalnya); border-radius:50%; margin-right:6px;"></span>Спальня · 1 683 показа</span>
+              <span>1 144 / 539</span>
+            </div>
+            <div class="share-bar-track">
+              <div class="seg seg-spec"  style="width: 68.0%;">Спец 68%</div>
+              <div class="seg seg-other" style="width: 32.0%;">Прочее 32%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placement-stats">
+          <div>
+            <div class="stat-label">Спец, абс. показы</div>
+            <div>Барби <b>1 417</b> · Спальня <b>1 144</b></div>
+          </div>
+          <div>
+            <div class="stat-label">Премиум-аукционов</div>
+            <div>Барби выиграла больше<sup style="color: var(--c-spalnya);">*</sup></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAILY DUAL TREND -->
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">CPC по дням — обе кампании</h3>
+          <p class="card-desc">
+            Спальня <b>стабильно дороже</b> Барби почти каждый день. Точка сближения 20 апреля (Спальня 468 ₽, Барби 278 ₽) показывает,
+            что у Спальни тоже бывают «дешёвые» дни — значит, потенциал для оптимизации есть.
+          </p>
+        </div>
+        <div class="legend-pills">
+          <span class="pill"><span class="dot" style="background: var(--c-barbie)"></span>Барби · ø 403 ₽</span>
+          <span class="pill"><span class="dot" style="background: var(--c-spalnya)"></span>Спальня · ø 733 ₽</span>
+        </div>
+      </div>
+      <div class="chart tall" id="chart-cpc-compare" aria-label="Сравнение CPC по дням двух кампаний"></div>
+    </div>
+
+    <!-- DAILY VOLUME COMPARE — 3 mini charts -->
+    <div class="grid-1-1-1">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Расход в день, ₽</h3>
+            <p class="card-desc">Спальня в типичный день тратит <b>~×1,8 больше</b>: медиана <b>8 547 ₽</b> против <b>4 667 ₽</b> у Барби.</p>
+          </div>
+          <span class="card-tag teal">×1,8</span>
+        </div>
+        <div class="chart" id="chart-daily-spend" aria-label="Дневной расход двух кампаний"></div>
+        <div class="chart-stats">
+          <div class="label">Распределение по дням · мин · медиана · макс</div>
+          <div class="row" id="stats-spend"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Клики в день</h3>
+            <p class="card-desc">У обеих кампаний медиана — <b>14 кликов/день</b>. В типичный день идут вровень; разница — в пиках.</p>
+          </div>
+          <span class="card-tag info">≈ равно</span>
+        </div>
+        <div class="chart" id="chart-daily-clicks" aria-label="Клики двух кампаний по дням"></div>
+        <div class="chart-stats">
+          <div class="label">Распределение по дням · мин · медиана · макс</div>
+          <div class="row" id="stats-clicks"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Показы в день</h3>
+            <p class="card-desc">Барби в типичный день — <b>×1,5 больше</b> показов: медиана <b>107</b> против <b>70</b> у Спальни.</p>
+          </div>
+          <span class="card-tag info">×1,5</span>
+        </div>
+        <div class="chart" id="chart-daily-impr" aria-label="Показы двух кампаний по дням"></div>
+        <div class="chart-stats">
+          <div class="label">Распределение по дням · мин · медиана · макс</div>
+          <div class="row" id="stats-impr"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCLUSION / HYPOTHESIS -->
+    <div class="hyp-card">
+      <h3>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        Что с этим делать
+      </h3>
+      <p class="desc">Два сценария интерпретации — какой верный, покажут только данные о конверсиях</p>
+
+      <div class="scenarios">
+        <div class="scenario">
+          <span class="num">сценарий 1</span>
+          <h4>Премиум окупается</h4>
+          <p>Если в Спальне CR (конверсия в заявку) хотя бы <b>в 2,5 раза выше</b>, чем у Барби — переплата за клик окупается. Логика: премиум-позиция = тёплый трафик с готовностью к покупке. Тогда <b>оставить как есть</b>.</p>
+        </div>
+        <div class="scenario">
+          <span class="num">сценарий 2</span>
+          <h4>Переплата без отдачи</h4>
+          <p>Если CR у Спальни и Барби сопоставим — Спальня переплачивает за позицию, а не за клиентов. Тогда повторить кейс Барби: <b>понизить ставки на 25–30%</b>, потерять ~1 позицию, но выиграть в показах и охвате за те же деньги.</p>
+        </div>
+      </div>
+
+      <div class="test-line">
+        <b>Гипотеза для теста.</b> Понизить ставки Спальни на 25–30% на 2 недели на части ключей. Ожидаемый эффект по аналогии с Барби: позиция упадёт примерно с 2,5 до 3,3, CPC снизится в 1,5–2 раза. Если число заявок не упадёт пропорционально — ставки имеет смысл оставить ниже.
+      </div>
+    </div>
+
+    <footer class="fnotes">
+      <p><sup>¹</sup> Период сравнения: 01.04 — 27.04.2026 (27 дней). У Барби в этом периоде стратегия менялась 8 апреля — данные включают и старый, и новый режим.</p>
+      <p><sup>²</sup> Все средние взвешены по показам. Цена клика = суммарный расход ÷ суммарные клики. Цена уникального = суммарный расход ÷ суммарный охват.</p>
+      <p><sup>³</sup> Категория «Эксклюзивное размещение» (2 показа у Спальни за весь апрель — 06.04 и 11.04) объединена с «Прочим» как статистический шум.</p>
+      <p><sup>*</sup> Барби выиграла 1 417 показов в спец. против 1 144 у Спальни — за счёт большего числа аукционов в которых участвовала, а не за счёт более высокой ставки. Доля спец у Спальни выше (68% vs 52%), но абсолютно — меньше.</p>
+      <div class="meta">
+        <span>Источники: <code>апрель.csv</code>, <code>вид размещения апрель.csv</code> · Яндекс.Директ</span>
+        <span>Подготовлено: 28.04.2026</span>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- ═══  TAB 3: KALININGRAD  ═══════════════ -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="tab-panel" data-panel="kaliningrad">
+
+    <header class="page-head">
+      <h1>
+        Поиск — Калининград
+        <span class="id">ID 116 957 090</span>
+        <span class="badge-status"><span class="dot"></span>Активна</span>
+      </h1>
+    </header>
+
+    <div class="insight" role="region" aria-label="Главный вывод по Калининграду">
+      <div class="ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+      </div>
+      <div class="text">
+        <b>Чистая поисковая кампания, концентрация на топ-позициях.</b> 95% бюджета (181 тыс. ₽ из 191) идёт в премиум-блоки над выдачей —
+        спецразмещение и эксклюзив. Реклама почти всегда занимает <b>позицию 1.0–1.05</b>. Из 426 поисковых запросов
+        половина бюджета — 5 главных «эротический массаж + город». Дешевле всего обходятся группы
+        <b>«лингам» (CPC 250 ₽)</b> и <b>«интим» (290 ₽)</b> — вдвое дешевле общего среднего.
+      </div>
+    </div>
+
+    <!-- KPI ROW -->
+    <div class="kpi-row">
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Расход за апрель</span>
+          <span class="kpi-delta good" style="background: var(--surface-2); color: var(--text-3);">27 дней</span>
+        </div>
+        <div class="kpi-value">190&nbsp;760<span class="unit">₽</span></div>
+        <div class="kpi-sub">в среднем <b>7 065 ₽/день</b></div>
+        <div class="kpi-spark" id="k-sp-spend" aria-hidden="true"></div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Клики</span>
+          <span class="kpi-delta good" style="background: var(--surface-2); color: var(--text-3);">CPC 444 ₽</span>
+        </div>
+        <div class="kpi-value">430</div>
+        <div class="kpi-sub">~<b>16 кликов/день</b> · CTR 10,8%</div>
+        <div class="kpi-spark" id="k-sp-clicks" aria-hidden="true"></div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Средняя позиция</span>
+          <span class="kpi-delta good" style="background: var(--good-wash); color: var(--good);">топ-блок</span>
+        </div>
+        <div class="kpi-value">2,58</div>
+        <div class="kpi-sub">в спец. <b>1,05</b> · в эксклюзиве <b>1,00</b></div>
+        <div class="kpi-spark" id="k-sp-pos" aria-hidden="true"></div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Охват уникальных</span>
+          <span class="kpi-delta good" style="background: var(--surface-2); color: var(--text-3);">158 ₽/уник.</span>
+        </div>
+        <div class="kpi-value">1&nbsp;206</div>
+        <div class="kpi-sub">~<b>45 уник./день</b> · 3 990 показов</div>
+        <div class="kpi-spark" id="k-sp-reach" aria-hidden="true"></div>
+      </div>
+
+    </div>
+
+    <!-- PLACEMENT SECTION -->
+    <div class="grid-1-2">
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Куда уходит бюджет</h3>
+            <p class="card-desc">95% денег — в премиум: <b>спецразмещение</b> над выдачей и <b>эксклюзив</b> с гарантированной позицией 1.</p>
+          </div>
+        </div>
+        <div class="donut-wrap">
+          <div class="donut-chart" id="k-chart-donut" aria-label="Распределение бюджета по типам размещения"></div>
+          <div class="donut-legend">
+            <span class="item"><span class="dot" style="background: var(--primary)"></span>Спец · 75%</span>
+            <span class="item"><span class="dot" style="background: var(--warn)"></span>Эксклюзив · 20%</span>
+            <span class="item"><span class="dot" style="background: var(--c-violet)"></span>Прочее · 5%</span>
+            <span class="item"><span class="dot" style="background: #cbd5e1"></span>Динамические · 0%</span>
+          </div>
+        </div>
+        <div class="placement-stats">
+          <div>
+            <div class="stat-label">Спецразмещение</div>
+            <div><b>143 679 ₽</b> · 1 999 показов · CPC <b>463 ₽</b></div>
+          </div>
+          <div>
+            <div class="stat-label">Эксклюзивное</div>
+            <div><b>37 687 ₽</b> · 385 показов · CPC <b>546 ₽</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Структура показов по дням</h3>
+            <p class="card-desc">
+              Спецразмещение — основа объёма, эксклюзив — точечная добавка. <b>22 апреля</b> — день почти без расхода
+              (197 ₽, 3 клика): что-то приостанавливалось, стоит выяснить причину.
+            </p>
+          </div>
+          <div class="legend-pills">
+            <span class="pill"><span class="dot" style="background: var(--primary)"></span>Спец</span>
+            <span class="pill"><span class="dot" style="background: var(--warn)"></span>Эксклюз</span>
+            <span class="pill"><span class="dot" style="background: var(--c-violet)"></span>Прочее</span>
+            <span class="pill"><span class="dot" style="background: #cbd5e1"></span>Динам.</span>
+          </div>
+        </div>
+        <div class="chart tall" id="k-chart-daily-stack" aria-label="Структура показов по дням и типу размещения"></div>
+      </div>
+    </div>
+
+    <!-- DAILY COMBO CHART -->
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Дневной расход и клики</h3>
+          <p class="card-desc">
+            Кампания работает ровно: 5–11 тыс. ₽ в день, 14–30 кликов. Пиковые дни — <b>6 апреля</b> (27 кликов) и <b>14 апреля</b> (30).
+            Провал <b>22 апреля</b> хорошо виден — расход почти ноль.
+          </p>
+        </div>
+        <div class="legend-pills">
+          <span class="pill"><span class="dot" style="background: var(--primary)"></span>Расход</span>
+          <span class="pill"><span class="dot" style="background: var(--good)"></span>Клики</span>
+        </div>
+      </div>
+      <div class="chart tall" id="k-chart-main" aria-label="Дневной расход и клики по Калининграду"></div>
+    </div>
+
+    <!-- QUERIES SECTION -->
+    <div class="grid-1-1">
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Темы запросов: где деньги, где дёшево</h3>
+            <p class="card-desc">
+              Сгруппировано по семантике. <b>Половина бюджета</b> уходит на «эротический массаж + город». Самая выгодная по CPC группа —
+              <b>«лингам»</b>: 250 ₽ против 444 ₽ среднего.
+            </p>
+          </div>
+        </div>
+        <div class="chart tall" id="k-chart-groups" aria-label="Распределение бюджета и CPC по темам запросов"></div>
+      </div>
+
+      <div class="card table-card">
+        <div class="table-head">
+          <h3>Топ-12 запросов <span class="count">из 426</span></h3>
+          <p class="desc">По расходу. Запросы — как есть из выгрузки Я.Директа.</p>
+        </div>
+        <div style="overflow-x: auto; max-height: 380px;">
+          <table class="data queries">
+            <thead>
+              <tr>
+                <th class="q-rank">#</th>
+                <th>Запрос</th>
+                <th style="text-align: right;">Расход</th>
+                <th style="text-align: right;">Кл.</th>
+                <th style="text-align: right;">CPC</th>
+              </tr>
+            </thead>
+            <tbody id="k-queries-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAILY TABLE -->
+    <div class="card table-card" style="margin-top: 16px;">
+      <div class="table-head">
+        <h3>Дневная сводка <span class="count">27</span></h3>
+        <p class="desc">Все дни апреля — для самостоятельной проверки</p>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>День</th>
+              <th style="text-align: right;">Расход, ₽</th>
+              <th style="text-align: right;">Показы</th>
+              <th style="text-align: right;">в т.ч. спец.</th>
+              <th style="text-align: right;">в т.ч. эксклюз.</th>
+              <th style="text-align: right;">Клики</th>
+              <th style="text-align: right;">CPC, ₽</th>
+              <th style="text-align: right;">Поз.</th>
+              <th style="text-align: right;">CTR, %</th>
+              <th style="text-align: right;">Охват</th>
+            </tr>
+          </thead>
+          <tbody id="k-daily-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer class="fnotes">
+      <p><sup>¹</sup> Период: 01.04 — 27.04.2026 (27 дней). Кампания «Поиск — Калининград (27.12.24)», ID 116 957 090. Тип — только Поиск, без РСЯ.</p>
+      <p><sup>²</sup> «Эксклюзивное размещение» в Я.Директе — гарантированная позиция 1 в топ-блоке за повышенную ставку. «Спецразмещение» — обычные топовые позиции. «Прочее» — гарантированные показы внизу выдачи (позиция ~5). «Динамические места на поиске» — дополнительные показы без оплаты.</p>
+      <p><sup>³</sup> Все средние взвешены по показам. Цена касания = суммарный расход ÷ охват уникальных за период.</p>
+      <p><sup>⁴</sup> Группировка запросов выполнена по корням слов: «лингам», «интим», «эро массаж», «эротический массаж», «эромассаж», «массаж с окончанием», «массаж члена/писи/ххх/дрочильня». Группа «другое» — остаток.</p>
+      <p><sup>⁵</sup> Из 426 уникальных запросов клики дали 129 (30%); остальные 297 — только показы без оплаты или с оплатой по другим запросам в той же сессии.</p>
+      <div class="meta">
+        <span>Источники: <code>калининград - базовый отчет.csv</code>, <code>калининград-поисковые запросы.csv</code> · Яндекс.Директ</span>
+        <span>Подготовлено: 28.04.2026</span>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- ═══  TAB 4: SEO  ═══════════════════════ -->
+  <!-- ════════════════════════════════════════ -->
+  <section class="tab-panel" data-panel="seo">
+
+    <header class="page-head">
+      <h1>
+        SEO продвижение
+        <span class="id">barbie-salon.ru · Калининград</span>
+        <span class="badge-status"><span class="dot"></span>Первый месяц работ</span>
+      </h1>
+    </header>
+
+    <div class="insight" role="region" aria-label="Главный вывод по SEO">
+      <div class="ico" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/><circle cx="20" cy="9" r="2" fill="currentColor"/></svg>
+      </div>
+      <div class="text">
+        <b>SEO работает.</b> За первый месяц поисковый трафик вырос на <span class="pos">+23% к мартовскому среднему</span> —
+        с 211 до 261 визитов в неделю. Последняя неделя апреля — <span class="pos">рекордные 302 визита</span>,
+        +43% к уровню до старта работ. Сильнее всего отозвался Яндекс (+44%), что важно для регионального бизнеса в Калининграде.
+      </div>
+    </div>
+
+    <!-- KPI ROW -->
+    <div class="kpi-row">
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Последняя неделя</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +35%
+          </span>
+        </div>
+        <div class="kpi-value">302<span class="unit">визита</span></div>
+        <div class="kpi-sub">было <b>224</b> в стартовой неделе · +78 визитов</div>
+        <div class="kpi-spark" id="seo-sp-total" aria-hidden="true"></div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Среднее за апрель</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +23%
+          </span>
+        </div>
+        <div class="kpi-value">261<span class="unit">в неделю</span></div>
+        <div class="kpi-sub">в марте было <b>211</b> · +50 визитов/нед</div>
+        <div class="kpi-spark" id="seo-sp-april" aria-hidden="true"></div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Яндекс</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +44%
+          </span>
+        </div>
+        <div class="kpi-value">128<span class="unit">визитов</span></div>
+        <div class="kpi-sub">было <b>89</b> · регион — главный фокус</div>
+        <div class="kpi-spark" id="seo-sp-yandex" aria-hidden="true"></div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Google</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +29%
+          </span>
+        </div>
+        <div class="kpi-value">172<span class="unit">визита</span></div>
+        <div class="kpi-sub">было <b>133</b> · отклик на тех. оптимизацию</div>
+        <div class="kpi-spark" id="seo-sp-google" aria-hidden="true"></div>
+      </div>
+
+    </div>
+
+    <!-- TRAFFIC TREND CHART -->
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Динамика поискового трафика по неделям</h3>
+          <p class="card-desc">
+            Серая зона — март (без SEO-работ). Маркер 1 апреля — старт работ. Видно, что после <b>двух недель «инерционного» периода</b>
+            (нужно время на индексацию и переоценку) трафик пошёл вверх и закрыл апрель на максимуме.
+          </p>
+        </div>
+        <div class="legend-pills">
+          <span class="pill"><span class="dot" style="background: #f59e0b"></span>Яндекс</span>
+          <span class="pill"><span class="dot" style="background: var(--primary)"></span>Google</span>
+        </div>
+      </div>
+      <div class="chart tall" id="seo-chart-traffic" aria-label="Недельный поисковый трафик по Яндексу и Google"></div>
+    </div>
+
+    <!-- WHAT WAS DONE -->
+    <h2 class="section-title">Что было сделано <span class="meta">5 направлений</span></h2>
+
+    <!-- Block 1: Контент -->
+    <div class="seo-block">
+      <div class="head">
+        <div class="num">1</div>
+        <div>
+          <h3>Контент и семантика</h3>
+          <div class="subtitle">7 статей · текст на главной · мета-теги</div>
+        </div>
+      </div>
+      <div class="why">
+        Поисковики оценивают, насколько глубоко сайт раскрывает тему. Если на сайте только страница услуг — он один из тысяч.
+        Если есть статьи на смежные темы — поисковик видит, что сайт <b>разбирается в нише</b>, и поднимает по всем связанным запросам.
+        Это называется <span class="term">Topical Authority</span> (авторитет по теме). Аналог: «Википедия» ранжируется почти по любому запросу,
+        потому что глубоко покрывает темы.
+      </div>
+
+      <h4>7 тематических статей · кластеры по техникам массажа</h4>
+      <p class="what-text">
+        <b>5 из 7 статей</b> нацелены на конкретные кластеры запросов (нуру, счастливый конец, веточка сакуры, для пар, в 4 руки) —
+        и все 5 кластеров вошли в топ-10 за месяц (см. секцию «Позиции» ниже).
+        Ещё 2 статьи (тантрический vs эротический, топ-10 техник) — для расширения общей экспертизы по теме.
+        Дополнительно: внутренние ссылки между статьями усиливают главную страницу.
+      </p>
+      <div class="seo-articles">
+        <a class="seo-article" href="https://barbie-salon.ru/articles/nuru-massazh-kaliningrade/" target="_blank" rel="noopener">
+          <span class="num-art">1</span><span class="title">Нуру массаж в Калининграде</span>
+          <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+        </a>
+        <a class="seo-article" href="https://barbie-salon.ru/articles/massazh-so-schastlivym-koncom-happy-end/" target="_blank" rel="noopener">
+          <span class="num-art">2</span><span class="title">Массаж со счастливым концом (happy end)</span>
+          <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+        </a>
+        <a class="seo-article" href="https://barbie-salon.ru/articles/massazh-vetochka-sakury-kaliningrade/" target="_blank" rel="noopener">
+          <span class="num-art">3</span><span class="title">Массаж «Веточка сакуры» в Калининграде</span>
+          <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+        </a>
+        <a class="seo-article" href="https://barbie-salon.ru/articles/tantricheskij-massazh-vs-eroticheskij/" target="_blank" rel="noopener">
+          <span class="num-art">4</span><span class="title">Тантрический vs эротический массаж</span>
+          <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+        </a>
+        <a class="seo-article" href="https://barbie-salon.ru/articles/tehniki-eroticheskogo-massazha-top10/" target="_blank" rel="noopener">
+          <span class="num-art">5</span><span class="title">Техники эротического массажа · топ-10</span>
+          <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+        </a>
+        <a class="seo-article" href="https://barbie-salon.ru/articles/eroticheskij-massazh-dlya-par-kaliningrade/" target="_blank" rel="noopener">
+          <span class="num-art">6</span><span class="title">Эротический массаж для пар в Калининграде</span>
+          <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+        </a>
+        <a class="seo-article" href="https://barbie-salon.ru/articles/eroticheskij-massazh-v-4-ruki-kaliningrade/" target="_blank" rel="noopener">
+          <span class="num-art">7</span><span class="title">Эротический массаж в 4 руки в Калининграде</span>
+          <svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+        </a>
+      </div>
+
+      <h4>SEO-текст на главной странице</h4>
+      <p class="what-text">
+        Добавлен описательный текст с целевыми запросами в нижней части главной — «<b>Эротический массаж в Калининграде — салон «Барби»</b>».
+        Главная страница — самая трастовая на сайте (получает больше всего внешних ссылок), и текст здесь даёт <b>максимальный эффект</b>
+        на коммерческие запросы вроде «эротический массаж калининград», «салон эротического массажа».
+      </p>
+
+      <h4>Оптимизация мета-тегов</h4>
+      <p class="what-text">
+        Переписаны Title, Description и H1 на ключевых страницах. <b>Title</b> — самый весомый сигнал релевантности для поисковиков
+        (~30% веса всех on-page факторов). <b>Description</b> не влияет на позиции напрямую, но влияет на CTR в выдаче —
+        точный и продающий сниппет даёт больше переходов с того же объёма показов.
+      </p>
+    </div>
+
+    <!-- Block 2: Техника -->
+    <div class="seo-block">
+      <div class="head">
+        <div class="num">2</div>
+        <div>
+          <h3>Техническая оптимизация</h3>
+          <div class="subtitle">скорость · отзывчивость · стабильность вёрстки</div>
+        </div>
+      </div>
+      <div class="why">
+        Скорость сайта — официальный <b>фактор ранжирования Google</b> с 2021 года (<span class="term">Core Web Vitals</span> — «основные метрики сайта»).
+        Медленный сайт ранжируется хуже и теряет посетителей: ~50% мобильных пользователей закрывают страницу,
+        которая грузится дольше 3 секунд. Ускорение работает в обе стороны — на позиции в выдаче <b>и</b> на конверсию посетителей в клиентов.
+      </div>
+
+      <h4>Текущие оценки PageSpeed Insights · скриншоты из Google</h4>
+      <p class="what-text">
+        Все 4 категории — в зелёной или жёлтой зоне (от 85 баллов). <b>SEO 100/100</b> — максимум возможного.
+        Производительность и Спец.возможности — в жёлтой зоне (88 и 85), требуют точечных правок чтобы выйти в зелёную (≥90).
+      </p>
+      <div class="ps-screenshot">
+        <img src="отчет по SEO-продвижению/google page speed2.jpg" alt="PageSpeed Insights — оценки 88, 85, 96, 100 и превью мобильной версии сайта" loading="lazy">
+      </div>
+
+      <h4>Core Web Vitals · проверка пройдена, все три метрики в зелёной зоне</h4>
+      <p class="what-text">
+        Core Web Vitals — официальный набор из 3 метрик Google: LCP (скорость загрузки), INP (отзывчивость), CLS (стабильность вёрстки).
+        С 2021 года входит в <b>факторы ранжирования</b>. Все метрики у нас в норме, плюс дополнительные FCP и TTFB.
+      </p>
+      <div class="ps-screenshot">
+        <img src="отчет по SEO-продвижению/google page speed.jpg" alt="Core Web Vitals: LCP 2,3с, INP 105мс, CLS 0, FCP 1,1с, TTFB 0,7с — все показатели зелёные" loading="lazy">
+      </div>
+    </div>
+
+    <!-- Block 3: Внешние ссылки -->
+    <div class="seo-block">
+      <div class="head">
+        <div class="num">3</div>
+        <div>
+          <h3>Внешние ссылки на трастовых СМИ</h3>
+          <div class="subtitle">3 размещения · перенос траста на сайт</div>
+        </div>
+      </div>
+      <div class="why">
+        Внешние ссылки — главный фактор ранжирования. Поисковики считают: чем больше <b>качественных</b> сайтов ссылается на ваш —
+        тем он авторитетнее. Ключевое — «качественных»: 1 ссылка с трастового СМИ перевешивает сотни ссылок со шлак-каталогов.
+        Качество измеряется метриками: <span class="term">ИКС</span> (Индекс Качества Сайта в Яндексе),
+        <span class="term">DR</span> (Domain Rating от Ahrefs), <span class="term">MOZ DA</span> (Domain Authority).
+        Чем выше — тем больше веса передаётся через ссылку.
+      </div>
+
+      <h4>3 размещения статей со ссылкой на barbie-salon.ru</h4>
+      <div class="donor-grid">
+
+        <div class="donor-card">
+          <div class="name">0225.ru</div>
+          <div class="donor-desc">Бобруйский новостной портал. Категория «СМИ и порталы».</div>
+          <div class="metrics">
+            <div class="m"><span class="lbl">ИКС</span><span class="val">190</span></div>
+            <div class="m"><span class="lbl">DR Ahrefs</span><span class="val">33</span></div>
+            <div class="m"><span class="lbl">MOZ DA</span><span class="val">34</span></div>
+            <div class="m"><span class="lbl">Spam Score</span><span class="val good">0</span></div>
+          </div>
+          <a class="placement-link" href="https://0225.ru/raznoe-10/9625-relaks8209massazh-i-spa8209uhod-v-moskve.html" target="_blank" rel="noopener">
+            Открыть размещение
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+          </a>
+        </div>
+
+        <div class="donor-card">
+          <div class="name">i38.ru</div>
+          <div class="donor-desc">ИА Иркутской области, Восточная Сибирь. Бизнес и потребитель.</div>
+          <div class="metrics">
+            <div class="m"><span class="lbl">ИКС</span><span class="val">560</span></div>
+            <div class="m"><span class="lbl">DR Ahrefs</span><span class="val">56</span></div>
+            <div class="m"><span class="lbl">MOZ DA</span><span class="val">49</span></div>
+            <div class="m"><span class="lbl">Spam Score</span><span class="val good">0</span></div>
+          </div>
+          <a class="placement-link" href="https://i38.ru/obschestvo-potrebitel/bolee-polovini-muzhchin-v-rossii-regulyarno-ispitivaiut-stress-prichini-i-sposobi-resheniya-problemi" target="_blank" rel="noopener">
+            Открыть размещение
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+          </a>
+        </div>
+
+        <div class="donor-card">
+          <div class="name">rubaltic.ru</div>
+          <div class="donor-desc">СМИ-портал. ~50 тыс. уникальных пользователей в неделю.</div>
+          <div class="metrics">
+            <div class="m"><span class="lbl">ИКС</span><span class="val">1 230</span></div>
+            <div class="m"><span class="lbl">DR Ahrefs</span><span class="val">51</span></div>
+            <div class="m"><span class="lbl">MOZ DA</span><span class="val">51</span></div>
+            <div class="m"><span class="lbl">Spam Score</span><span class="val good">0</span></div>
+          </div>
+          <a class="placement-link" href="https://www.rubaltic.ru/press/kultura-prikosnoveniy-gid-po-mirovym-tekhnikam-massazha/" target="_blank" rel="noopener">
+            Открыть размещение
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M10 14L20 4"/><path d="M19 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <h2 class="section-title">Позиции по ключевым запросам <span class="meta">96 ключей · до и после</span></h2>
+
+    <div class="insight" role="region" style="background: linear-gradient(95deg, var(--good-wash) 0%, var(--primary-wash) 100%); border-color: var(--good-soft);">
+      <div class="ico" style="color: var(--good);" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div class="text">
+        <b>Прямое доказательство, что 7 написанных статей сработали.</b> Из 96 отслеживаемых запросов
+        в топ-10 Яндекса попало <span class="pos">81 (84%)</span> — было 44 (46%).
+        <b>5 новых тематических групп</b> (нуру, счастливый конец, веточка сакуры, для пар, в 4 руки) стартовали
+        с <b>0 запросов в топ-10</b> и через месяц оказались в нём на <b>55–100%</b>.
+      </div>
+    </div>
+
+    <div class="kpi-row">
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">В топ-10 Яндекса</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +84%
+          </span>
+        </div>
+        <div class="kpi-value">81<span class="unit">из 96</span></div>
+        <div class="kpi-sub">было <b>44</b> (46%) · стало <b>84%</b> ключей</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">В топ-10 Google</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +66%
+          </span>
+        </div>
+        <div class="kpi-value">68<span class="unit">из 96</span></div>
+        <div class="kpi-sub">было <b>41</b> (43%) · стало <b>71%</b> ключей</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Видимость · Яндекс<sup style="color: var(--primary);">⁶</sup></span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +55%
+          </span>
+        </div>
+        <div class="kpi-value">52,3</div>
+        <div class="kpi-sub">было <b>33,7</b> · больше топ-3 = выше видимость</div>
+      </div>
+
+      <div class="kpi">
+        <div class="kpi-top">
+          <span class="kpi-label">Видимость · Google</span>
+          <span class="kpi-delta good">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17l10-10M17 17V7H7"/></svg>
+            +162%
+          </span>
+        </div>
+        <div class="kpi-value">28,0</div>
+        <div class="kpi-sub">было <b>10,7</b> · рост в 2,6 раза</div>
+      </div>
+
+    </div>
+
+    <!-- TIER DISTRIBUTION CHART -->
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Распределение запросов по топ-зонам · до и после месяца SEO</h3>
+          <p class="card-desc">
+            Цветные сегменты — сколько запросов попало в каждую зону выдачи. <b>Зелёное (топ-3)</b> и <b>сине-фиолетовое (топ 4–10)</b> — то,
+            ради чего работаем. <b>Серое (нет в топ-100)</b> — сократилось с 52→13 в Яндексе и 54→20 в Google.
+          </p>
+        </div>
+      </div>
+      <div class="chart tall" id="seo-chart-tiers" aria-label="Распределение позиций по топ-зонам в Яндексе и Google до и после"></div>
+    </div>
+
+    <!-- GROUPS BREAKDOWN -->
+    <div class="grid-1-1">
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Топ-10 по группам запросов · Яндекс</h3>
+            <p class="card-desc">
+              Старая группа «Эротический массаж» уже была в топе и осталась. <b>5 новых групп</b> (под написанные статьи)
+              стартовали с 0% и взлетели до 55–100%.
+            </p>
+          </div>
+          <span class="card-tag" style="background: rgba(245,158,11,0.12); color: #b67517;">Yandex</span>
+        </div>
+        <div class="chart tall" id="seo-chart-groups-y" aria-label="Доля запросов в топ-10 Яндекса по группам"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <h3 class="card-title">Топ-10 по группам запросов · Google</h3>
+            <p class="card-desc">
+              В Google картина похожая. Группа «Веточка сакуры» — слабее по охвату (33%), это нормально:
+              в Google продвижение по узким брендированным запросам идёт медленнее.
+            </p>
+          </div>
+          <span class="card-tag info">Google</span>
+        </div>
+        <div class="chart tall" id="seo-chart-groups-g" aria-label="Доля запросов в топ-10 Google по группам"></div>
+      </div>
+
+    </div>
+
+    <!-- TOP GAINERS TABLE -->
+    <div class="card table-card">
+      <div class="table-head">
+        <h3>Самые впечатляющие приросты <span class="count">15</span></h3>
+        <p class="desc">Запросы, которые поднялись с «не в топ-100» (101) сразу в топ-3</p>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="data gainers">
+          <thead>
+            <tr>
+              <th>Запрос</th>
+              <th>Система</th>
+              <th style="text-align: right;">Было</th>
+              <th>→</th>
+              <th style="text-align: right;">Стало</th>
+              <th style="text-align: right;">Прирост позиций</th>
+            </tr>
+          </thead>
+          <tbody id="seo-gainers-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer class="fnotes">
+      <p><sup>¹</sup> Источник трафика: Яндекс.Метрика, отчёт «Поисковые системы», недельные группировки за 8 недель (02.03 — 26.04.2026).</p>
+      <p><sup>²</sup> Старт SEO-работ — начало апреля 2026. Сравнение «до/после» — март (4 недели) против апреля (4 недели).</p>
+      <p><sup>³</sup> SEO-эффект отложен на 2–6 недель: поисковикам нужно время на индексацию новых статей, переоценку ссылок и пересчёт ранжирования. Поэтому первые 1–2 недели апреля показывают «инерционный» рост, а реальный отклик виден в последние недели.</p>
+      <p><sup>⁴</sup> Метрики доноров (ИКС / DR / MOZ DA) — публичные показатели Яндекса и сторонних SEO-сервисов (Ahrefs, Moz). Spam Score 0 у всех трёх доноров означает отсутствие признаков спам-сетки.</p>
+      <p><sup>⁵</sup> PageSpeed Insights — публичный инструмент Google для замера Core Web Vitals. Шкала 0–100, зелёная зона ≥ 90, жёлтая 50–89, красная < 50.</p>
+      <p><sup>⁶</sup> Видимость = сумма (1 / позиция) по всем запросам в топ-100. Стандартная SEO-метрика: чем выше позиция, тем больше вклад в видимость. Учитывает, что топ-1 даёт ~30% кликов, топ-3 ~60%, топ-10 ~5%.</p>
+      <p><sup>⁷</sup> Замеры позиций — 96 высокочастотных запросов для Калининграда, мобильная выдача. Замер «до» — 5 марта (без SEO), «после» — 28 апреля (после месяца работ). Значение «101» в исходных данных означает «не в топ-100» — отсутствие видимости.</p>
+      <div class="meta">
+        <span>Источники: Яндекс.Метрика · PageSpeed Insights · биржа крауд-ссылок · <code>позиции.xlsx</code></span>
+        <span>Подготовлено: 28.04.2026</span>
+      </div>
+    </footer>
+
+  </section>
+
+</div>
+
+<script>
+/* ════════════════════════════════════════════ */
+/* ═══════════════ TAB 1 DATA ════════════════ */
+/* ════════════════════════════════════════════ */
+const dates = ['25.03','26.03','27.03','28.03','29.03','30.03','31.03',
+  '01.04','02.04','03.04','04.04','05.04','06.04','07.04',
+  '08.04','09.04','10.04','11.04','12.04','13.04','14.04',
+  '15.04','16.04','17.04','18.04','19.04','20.04','21.04','22.04'];
+const spend  = [11288.50,6868.00,7235.38,14573.26,5382.14,11048.72,8581.30,1893.02,11434.46,10950.07,13100.69,5569.36,10275.27,13224.95,5356.32,1964.09,2819.60,3961.49,2214.13,4862.87,2761.00,3373.65,4170.86,4147.94,8713.61,4667.15,7235.60,5508.61,4106.44];
+const impr   = [61,45,28,76,34,65,41,12,61,46,150,34,44,33,77,80,80,147,117,107,82,87,113,135,225,129,130,133,103];
+const clicks = [12,10,12,16,7,13,10,3,14,11,21,9,10,12,9,10,12,16,14,14,9,10,15,15,27,21,26,14,15];
+const cpc    = [940.71,686.80,602.95,910.83,768.88,849.90,858.13,631.01,816.75,995.46,623.84,618.82,1027.53,1102.08,595.15,196.41,234.97,247.59,158.15,347.35,306.78,337.36,278.06,276.53,322.73,222.25,278.29,393.47,273.76];
+const pos    = [1.91,1.64,1.89,2.15,2.41,1.95,1.87,3.17,1.89,2.04,2.47,2.32,1.70,1.76,3.78,4.37,3.88,4.12,3.80,3.44,3.80,3.29,3.35,2.92,3.55,3.09,3.30,3.52,2.94];
+const ctr    = [19.67,22.22,42.86,21.05,20.59,20.00,24.39,25.00,22.95,23.91,14.00,26.47,22.73,36.36,11.69,12.50,15.00,10.88,11.97,13.08,10.98,11.49,13.27,11.11,12.00,16.28,20.00,10.53,14.56];
+const traffic= [100.99,100.42,110.53,101.54,103.84,99.14,105.89,56.15,113.70,110.38,94.19,81.25,109.68,119.37,53.12,38.65,62.52,38.47,46.62,67.05,43.24,70.36,73.06,81.02,61.61,67.25,71.60,62.98,75.90];
+const reach  = [40,37,25,48,19,50,31,12,43,38,94,24,30,30,53,53,39,82,80,58,54,59,62,83,128,98,79,82,64];
+const specImpr  = [53,41,23,60,23,55,33,6,51,38,120,26,39,28, 29,16,34,48,45,58,33,45,53,79,107,84,69,60,63];
+const otherImpr = [8,4,5,16,11,10,8,6,10,8,30,8,5,5, 48,64,46,99,72,49,49,42,60,56,118,45,61,73,40];
+
+const SPLIT = 14;
+const avg = {
+  cpc:    [821.41, 290.15],
+  pos:    [2.08, 3.52],
+  ctr:    [21.92, 13.01],
+  traffic:[101.58, 61.53]
+};
+
+/* ════════════════════════════════════════════ */
+/* ═══════════════ TAB 2 DATA (april) ═══════ */
+/* ════════════════════════════════════════════ */
+const aprDates = ['01.04','02.04','03.04','04.04','05.04','06.04','07.04','08.04','09.04','10.04','11.04','12.04','13.04','14.04','15.04','16.04','17.04','18.04','19.04','20.04','21.04','22.04','23.04','24.04','25.04','26.04','27.04'];
+// Барби (April 01-27)
+const bSpend  = [1893.02,11434.46,10950.07,13100.69,5569.36,10275.27,13224.95,5356.32,1964.09,2819.60,3961.49,2214.13,4862.87,2761.00,3373.65,4170.86,4147.94,8713.61,4667.15,7235.60,5508.61,4106.44,3005.11,2619.13,4749.18,5123.32,1553.04];
+const bImpr   = [12,61,46,150,34,44,33,77,80,80,147,117,107,82,87,113,135,225,129,130,133,103,109,107,174,116,89];
+const bClicks = [3,14,11,21,9,10,12,9,10,12,16,14,14,9,10,15,15,27,21,26,14,15,16,6,20,15,7];
+const bCpc    = [631.01,816.75,995.46,623.84,618.82,1027.53,1102.08,595.15,196.41,234.97,247.59,158.15,347.35,306.78,337.36,278.06,276.53,322.73,222.25,278.29,393.47,273.76,187.82,436.52,237.46,341.55,221.86];
+const bPos    = [3.17,1.89,2.04,2.47,2.32,1.70,1.76,3.78,4.37,3.88,4.12,3.80,3.44,3.80,3.29,3.35,2.92,3.55,3.09,3.30,3.52,2.94,3.46,3.46,3.80,3.37,3.93];
+// Спальня (April 01-27)
+const sSpend  = [4167.70,13298.94,12839.27,12917.14,988.03,9577.22,18479.52,7763.98,15746.47,8546.65,7546.29,523.52,17620.45,14255.92,12087.07,11359.30,7466.56,3562.16,1888.12,11690.77,18137.59,11569.46,6599.60,8185.13,7661.72,4475.74,7695.78];
+const sImpr   = [12,76,51,80,21,64,36,75,52,44,41,9,58,88,71,93,70,54,13,113,98,84,87,89,70,51,83];
+const sClicks = [4,16,11,11,3,14,14,13,14,9,7,1,16,16,16,17,15,8,3,25,30,18,16,14,12,9,18];
+const sCpc    = [1041.93,831.18,1167.21,1174.29,329.34,684.09,1319.97,597.23,1124.75,949.63,1078.04,523.52,1101.28,891.00,755.44,668.19,497.77,445.27,629.37,467.63,604.59,642.75,412.48,584.65,638.48,497.30,427.54];
+const sPos    = [3.00,2.50,2.32,2.92,4.48,1.92,1.97,2.12,1.90,2.34,1.97,2.22,1.52,2.56,2.77,3.40,3.34,3.35,2.62,1.87,1.97,2.14,2.85,2.93,2.20,3.17,2.09];
+
+/* ════════════════════════════════════════════ */
+/* ═══════════════ TAB 3 DATA (Kaliningrad) ═══ */
+/* ════════════════════════════════════════════ */
+const kDates  = ['01.04','02.04','03.04','04.04','05.04','06.04','07.04','08.04','09.04','10.04','11.04','12.04','13.04','14.04','15.04','16.04','17.04','18.04','19.04','20.04','21.04','22.04','23.04','24.04','25.04','26.04','27.04'];
+const kSpend  = [8458.24,10888.79,9500.81,8755.22,837.96,8919.30,5825.36,8538.06,9897.87,9110.51,6040.44,4723.85,6432.22,11153.63,5971.92,11126.21,5999.33,2996.45,3714.78,9776.89,6704.17,197.65,7447.01,8689.63,6298.90,5275.39,7479.12];
+const kImpr   = [164,151,130,95,44,249,130,184,166,178,85,79,234,184,173,181,145,137,102,172,131,102,150,169,183,138,134];
+const kClicks = [14,17,14,15,4,27,10,20,20,19,14,14,16,30,20,20,13,11,8,19,15,3,17,15,20,18,17];
+const kReach  = [141,111,106,92,45,167,99,136,142,124,68,79,183,132,128,122,99,101,87,138,115,69,113,129,158,113,119];
+const kPos    = [2.42,2.51,2.58,1.98,2.75,2.45,2.11,2.19,2.31,2.76,2.56,1.88,2.38,2.34,2.96,3.45,3.10,3.12,2.66,2.34,2.60,4.29,2.29,2.29,2.34,2.46,2.47];
+const kCpc    = [604.2,640.5,678.6,583.7,209.5,330.3,582.5,426.9,494.9,479.5,431.5,337.4,402.0,371.8,298.6,556.3,461.5,272.4,464.3,514.6,446.9,65.9,438.1,579.3,314.9,293.1,439.9];
+const kCtr    = [8.54,11.26,10.77,15.79,9.09,10.84,7.69,10.87,12.05,10.67,16.47,17.72,6.84,16.30,11.56,11.05,8.97,8.03,7.84,11.05,11.45,2.94,11.33,8.88,10.93,13.04,12.69];
+// Per-placement daily impressions
+const kSpec   = [88,87,60,41,19,123,80,114,101,76,44,44,132,116,75,62,62,53,42,97,63,18,93,81,89,63,76];
+const kExcl   = [18,8,16,28,5,29,12,14,12,24,7,14,22,5,11,8,6,9,14,17,14,0,6,30,28,21,7];
+const kOther  = [57,56,51,23,19,89,36,54,52,78,32,17,79,60,84,109,75,72,41,57,52,84,48,54,60,50,48];
+const kDyn    = [1,0,3,3,1,8,2,2,1,0,2,4,1,3,3,2,2,3,5,1,2,0,3,4,6,4,3];
+
+// Top-12 queries by spend
+const kTopQueries = [
+  { q: 'эротический массаж калининград',          spend: 45876, clicks: 98, cpc: 468 },
+  { q: 'дрочильня калининград',                   spend: 19723, clicks: 23, cpc: 858 },
+  { q: 'эротический массаж в калининграде',       spend: 12810, clicks: 30, cpc: 427 },
+  { q: 'эро массаж калининград',                  spend: 12226, clicks: 21, cpc: 582 },
+  { q: 'эротический массаж',                      spend:  9803, clicks: 18, cpc: 545 },
+  { q: 'эромассаж калининград',                   spend:  3993, clicks:  5, cpc: 799 },
+  { q: 'массаж лингама калининград',              spend:  3760, clicks: 14, cpc: 269 },
+  { q: 'дрочильня',                               spend:  3751, clicks:  8, cpc: 469 },
+  { q: 'эро массаж в калининграде',               spend:  3702, clicks:  7, cpc: 529 },
+  { q: 'дрочильни калининград',                   spend:  3458, clicks:  4, cpc: 865 },
+  { q: 'интимный массаж калининград',             spend:  3339, clicks:  8, cpc: 417 },
+  { q: 'дрочильня в калининграде',                spend:  2927, clicks:  7, cpc: 418 }
+];
+
+// Query groups by topic
+const kGroups = [
+  { name: 'Эротический массаж',         spend: 96654, clicks: 212, cpc: 456 },
+  { name: 'Массаж члена/ххх/дрочильня', spend: 30646, clicks:  51, cpc: 601 },
+  { name: 'Эро массаж',                 spend: 23673, clicks:  40, cpc: 592 },
+  { name: 'Другое',                     spend: 12300, clicks:  39, cpc: 315 },
+  { name: 'Интим',                      spend: 11614, clicks:  40, cpc: 290 },
+  { name: 'Лингам',                     spend:  7993, clicks:  32, cpc: 250 },
+  { name: 'Эромассаж (одно слово)',     spend:  6242, clicks:  10, cpc: 624 },
+  { name: 'Массаж с окончанием',        spend:  1636, clicks:   6, cpc: 273 }
+];
+
+/* ════════════════════════════════════════════ */
+/* ═══════════════ STYLE TOKENS ═══════════════ */
+/* ════════════════════════════════════════════ */
+const T = {
+  text:'#14111f', text2:'#4b4760', text3:'#8a85a3',
+  border:'#ece9f2', surface2:'#f7f5fb',
+  primary:'#7C5CFF',
+  pink:'#f4a8c5', pinkDark:'#b8517a',
+  blue:'#a8c4f5', blueDark:'#4476c4',
+  violet:'#c1b5f0',
+  good:'#10b981', bad:'#ef4444', warn:'#f59e0b',
+  barbie:'#7C5CFF',
+  spalnya:'#14b8a6'
+};
+
+const ruNum = n => new Intl.NumberFormat('ru-RU').format(n);
+
+function ttBase() {
+  return {
+    trigger: 'axis',
+    backgroundColor: '#ffffff',
+    borderColor: T.border, borderWidth: 1,
+    textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+    extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12), 0 2px 6px rgba(80,68,128,0.06); border-radius: 10px; padding: 10px 12px;',
+    axisPointer: { lineStyle: { color: T.border, width: 1 } },
+    padding: [10,12]
+  };
+}
+function axBase() {
+  return {
+    axisLine:  { lineStyle: { color: T.border } },
+    axisTick:  { show: false },
+    axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11 },
+    splitLine: { lineStyle: { color: T.border, type: 'solid' } }
+  };
+}
+function gridBase(extra={}) {
+  return Object.assign({ left: 50, right: 30, top: 22, bottom: 28, containLabel: false }, extra);
+}
+
+/* ════════════════════════════════════════════ */
+/* ═══════════════ TAB 1 CHARTS ═══════════════ */
+/* ════════════════════════════════════════════ */
+
+function spark(id, data, color) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const c = echarts.init(el, null, { renderer: 'svg' });
+  c.setOption({
+    grid: { left: 0, right: 0, top: 2, bottom: 0 },
+    xAxis: { type: 'category', show: false, data: dates },
+    yAxis: { type: 'value', show: false, scale: true },
+    series: [{
+      type: 'line', data, smooth: true, symbol: 'none',
+      lineStyle: { color, width: 1.6 },
+      areaStyle: {
+        color: new echarts.graphic.LinearGradient(0,0,0,1, [
+          { offset: 0, color: color + '55' }, { offset: 1, color: color + '00' }
+        ])
+      },
+      markLine: {
+        silent: true, symbol: 'none',
+        lineStyle: { color: T.text3, type: 'dashed', width: 1, opacity: 0.4 },
+        data: [{ xAxis: SPLIT, label: { show: false } }]
+      }
+    }]
+  });
+}
+
+function initStrategyTab() {
+  spark('sp-spend',  spend,  T.primary);
+  spark('sp-clicks', clicks, T.good);
+  spark('sp-reach',  reach,  T.blue);
+  spark('sp-cpc',    cpc,    T.warn);
+
+  // DONUT
+  const donut = echarts.init(document.getElementById('chart-donut'));
+  donut.setOption({
+    tooltip: {
+      backgroundColor: '#fff', borderColor: T.border, borderWidth: 1,
+      textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+      extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12); border-radius: 10px;',
+      formatter: p => `<b>${p.name}</b><br/>${ruNum(Math.round(p.value))} ₽ · ${p.percent}% от общего`
+    },
+    series: [{
+      type: 'pie', radius: ['58%','78%'], center: ['50%','50%'],
+      avoidLabelOverlap: true,
+      itemStyle: { borderColor: '#fff', borderWidth: 4, borderRadius: 6 },
+      label: {
+        show: true, position: 'center',
+        formatter: () => `{a|−49,9%}\n{b|к расходу}\n{c|131 425 → 65 863 ₽}`,
+        rich: {
+          a: { fontSize: 28, fontWeight: 700, color: T.good, fontFamily: 'Inter', lineHeight: 32, padding: [0,0,2,0] },
+          b: { fontSize: 13, color: T.text3, fontFamily: 'Inter', lineHeight: 16 },
+          c: { fontSize: 11, color: T.text2, fontFamily: 'Inter', fontWeight: 500, lineHeight: 18, padding: [4,0,0,0] }
+        }
+      },
+      labelLine: { show: false },
+      data: [
+        { value: 131425.12, name: 'P1 · автостратегия', itemStyle: { color: T.pink }},
+        { value: 65863.36,  name: 'P2 · ручное',       itemStyle: { color: T.blue }}
+      ]
+    }]
+  });
+
+  // MAIN COMBO
+  const main = echarts.init(document.getElementById('chart-main'));
+  main.setOption({
+    tooltip: ttBase(),
+    grid: gridBase({ left: 50, right: 50, top: 14, bottom: 28 }),
+    xAxis: Object.assign({ type: 'category', data: dates, boundaryGap: true }, axBase()),
+    yAxis: [
+      Object.assign({ type: 'value', axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11, formatter: v => v >= 1000 ? (v/1000)+'к' : v }}, axBase()),
+      Object.assign({ type: 'value', position: 'right', splitLine: { show: false }, axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11 }}, axBase())
+    ],
+    series: [
+      {
+        name: 'Расход', type: 'bar', yAxisIndex: 0, data: spend,
+        barWidth: '55%',
+        itemStyle: { color: p => p.dataIndex < SPLIT ? T.pink : T.blue, borderRadius: [4,4,0,0] },
+        markLine: {
+          silent: true, symbol: 'none',
+          data: [{
+            xAxis: dates[SPLIT],
+            lineStyle: { color: T.text3, type: 'dashed', width: 1.2 },
+            label: { show: true, formatter: '8 апр\nсменили\nстратегию', color: T.text2, fontSize: 10.5, fontFamily: 'Inter', fontWeight: 500, lineHeight: 13, position: 'insideEndTop', distance: 6, backgroundColor: '#fff', padding: [4,6], borderRadius: 6, borderColor: T.border, borderWidth: 1 }
+          }]
+        },
+        markPoint: {
+          symbolSize: 0,
+          label: { fontSize: 10.5, fontFamily: 'Inter', fontWeight: 600, backgroundColor: '#fff', padding: [4,6], borderRadius: 6, borderColor: T.border, borderWidth: 1, distance: 8 },
+          data: [
+            { coord: [dates[6], 9388], value: 'ø 9 388 ₽/день', itemStyle: { color: T.pinkDark }, label: { color: T.pinkDark, position: 'top' }},
+            { coord: [dates[22], 4391], value: 'ø 4 391 ₽/день', itemStyle: { color: T.blueDark }, label: { color: T.blueDark, position: 'top' }}
+          ]
+        }
+      },
+      {
+        name: 'Клики', type: 'line', yAxisIndex: 1, data: clicks,
+        smooth: true, symbol: 'circle', symbolSize: 4,
+        lineStyle: { color: T.primary, width: 2 },
+        itemStyle: { color: T.primary, borderColor: '#fff', borderWidth: 2 }
+      }
+    ]
+  });
+
+  // METRIC LINE CHARTS
+  function lineChart(id, data, color, avgPair, opts={}) {
+    const c = echarts.init(document.getElementById(id));
+    const v13 = data[13], v14 = data[14];
+    const fmt = opts.fmtVal || (v => v);
+    c.setOption({
+      tooltip: ttBase(),
+      grid: gridBase({ left: 50, right: 24, top: 28, bottom: 26 }),
+      xAxis: Object.assign({ type: 'category', data: dates, boundaryGap: false }, axBase()),
+      yAxis: Object.assign({ type: 'value', scale: true, inverse: opts.inverse, axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11, formatter: opts.fmt || (v => v) }}, axBase()),
+      series: [{
+        type: 'line', data, smooth: true, symbol: 'circle', symbolSize: 4,
+        lineStyle: { color, width: 2 },
+        itemStyle: { color: p => p.dataIndex < SPLIT ? T.pink : T.blue, borderColor: '#fff', borderWidth: 1.5 },
+        areaStyle: opts.area !== false ? {
+          color: new echarts.graphic.LinearGradient(0,0,0,1, [{ offset: 0, color: color + '33' }, { offset: 1, color: color + '02' }])
+        } : undefined,
+        markLine: {
+          silent: true, symbol: 'none',
+          data: [
+            { xAxis: dates[SPLIT], lineStyle: { color: T.text3, type: 'dashed', width: 1, opacity: 0.5 }, label: { show: false }},
+            { yAxis: avgPair[0], xAxis: dates[SPLIT-1], lineStyle: { color: T.pink, type: [4,4], width: 1 }, label: { show: true, formatter: 'P1 ø ' + (opts.fmtAvg ? opts.fmtAvg(avgPair[0]) : avgPair[0].toFixed(0)), fontSize: 10, color: T.pinkDark, position: 'insideStartTop', backgroundColor: '#fff', padding: [2,5], borderRadius: 4 }},
+            { yAxis: avgPair[1], lineStyle: { color: T.blue, type: [4,4], width: 1 }, label: { show: true, formatter: 'P2 ø ' + (opts.fmtAvg ? opts.fmtAvg(avgPair[1]) : avgPair[1].toFixed(0)), fontSize: 10, color: T.blueDark, position: 'insideEndTop', backgroundColor: '#fff', padding: [2,5], borderRadius: 4 }}
+          ]
+        },
+        markPoint: {
+          symbolSize: 0,
+          label: { fontSize: 11, fontFamily: 'Inter', fontWeight: 600, backgroundColor: '#fff', padding: [4,6], borderRadius: 6, borderColor: T.border, borderWidth: 1, distance: 10 },
+          data: [
+            { coord: [dates[13], v13], value: fmt(v13), itemStyle: { color: T.pinkDark }, label: { color: T.pinkDark, position: opts.labelP1Pos || 'top' }},
+            { coord: [dates[14], v14], value: fmt(v14), itemStyle: { color: T.blueDark }, label: { color: T.blueDark, position: opts.labelP2Pos || 'bottom' }}
+          ]
+        }
+      }]
+    });
+  }
+
+  lineChart('chart-cpc', cpc, T.warn, avg.cpc, { fmt: v => v + '₽', fmtAvg: v => v.toFixed(0)+'₽', fmtVal: v => v.toFixed(0) + ' ₽' });
+  lineChart('chart-pos', pos, T.bad, avg.pos, { inverse: true, fmt: v => v.toFixed(1), fmtAvg: v => v.toFixed(2), fmtVal: v => v.toFixed(2) });
+  lineChart('chart-ctr', ctr, T.good, avg.ctr, { fmt: v => v + '%', fmtAvg: v => v.toFixed(1)+'%', fmtVal: v => v.toFixed(1) + '%' });
+  lineChart('chart-traffic', traffic, T.primary, avg.traffic, { fmtAvg: v => v.toFixed(0), fmtVal: v => v.toFixed(0) });
+
+  // PLACEMENT STACKED
+  const place = echarts.init(document.getElementById('chart-placement'));
+  place.setOption({
+    tooltip: {
+      trigger: 'axis', axisPointer: { type: 'shadow' },
+      backgroundColor: '#fff', borderColor: T.border, borderWidth: 1,
+      textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+      extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12); border-radius: 10px;',
+      formatter: params => {
+        const lbl = params[0].axisValue;
+        const spec = params.find(p => p.seriesName === 'Спецразмещение')?.value || 0;
+        const other = params.find(p => p.seriesName === 'Прочее')?.value || 0;
+        const total = spec + other;
+        const specPct = total ? (spec/total*100).toFixed(0) : 0;
+        return `<b style="font-size:13px;">${lbl}.2026</b><br/>
+          <span style="display:inline-block; width:8px; height:8px; background:${T.primary}; border-radius:2px; margin-right:6px;"></span>Спецразмещение: <b>${spec}</b> (${specPct}%)<br/>
+          <span style="display:inline-block; width:8px; height:8px; background:${T.violet}; border-radius:2px; margin-right:6px;"></span>Прочее: <b>${other}</b> (${100-specPct}%)<br/>
+          <div style="margin-top:6px; padding-top:6px; border-top:1px solid ${T.border}; font-size:11.5px; color:${T.text3};">Всего: <b style="color:${T.text}">${total}</b> показов</div>`;
+      }
+    },
+    grid: gridBase({ left: 44, right: 16, top: 16, bottom: 28 }),
+    xAxis: Object.assign({ type: 'category', data: dates, boundaryGap: true }, axBase()),
+    yAxis: Object.assign({ type: 'value', axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11 }}, axBase()),
+    series: [
+      {
+        name: 'Прочее', type: 'bar', stack: 'p', data: otherImpr,
+        barWidth: '60%',
+        itemStyle: { color: T.violet, borderRadius: [0,0,0,0] },
+        markLine: {
+          silent: true, symbol: 'none',
+          data: [{ xAxis: dates[SPLIT], lineStyle: { color: T.text3, type: 'dashed', width: 1.2 }, label: { show: true, formatter: '8 апр', color: T.text2, fontSize: 10.5, fontFamily: 'Inter', fontWeight: 500, position: 'insideEndTop', distance: 6, backgroundColor: '#fff', padding: [3,5], borderRadius: 4, borderColor: T.border, borderWidth: 1 }}]
+        }
+      },
+      { name: 'Спецразмещение', type: 'bar', stack: 'p', data: specImpr, itemStyle: { color: T.primary, borderRadius: [4,4,0,0] }}
+    ]
+  });
+
+  // DAILY TABLE
+  const tbody = document.getElementById('daily-table');
+  dates.forEach((d, i) => {
+    const isP2 = i >= SPLIT;
+    const tr = document.createElement('tr');
+    const cls = isP2 ? 'p2' : 'p1';
+    const stage = isP2 ? 'Ручное' : 'Авто';
+    const specPct = impr[i] ? Math.round(specImpr[i] / impr[i] * 100) : 0;
+    tr.innerHTML = `
+      <td><div class="day-cell"><div class="day-icon ${cls}">${d.split('.')[0]}</div><div><div class="day-name">${d}.2026</div><div class="day-meta">${isP2 ? 'P2 · день ' + (i - SPLIT + 1) : 'P1 · день ' + (i + 1)}</div></div></div></td>
+      <td><span class="stage-badge ${cls}">${stage}</span></td>
+      <td class="num">${ruNum(spend[i].toFixed(0))}</td>
+      <td class="num muted">${ruNum(impr[i])}</td>
+      <td class="num muted">${specImpr[i]} <span style="color: var(--text-4); font-size: 11px;">·&nbsp;${specPct}%</span></td>
+      <td class="num">${clicks[i]}</td>
+      <td class="num">${ruNum(cpc[i].toFixed(0))}</td>
+      <td class="num muted">${pos[i].toFixed(2)}</td>
+      <td class="num muted">${ctr[i].toFixed(1)}</td>
+      <td class="num">${reach[i]}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ════════════════════════════════════════════ */
+/* ═══════════════ TAB 2 CHARTS ═══════════════ */
+/* ════════════════════════════════════════════ */
+function initCompareTab() {
+  // SCATTER: position vs CPC
+  const sc = echarts.init(document.getElementById('chart-scatter'));
+  const bData = bCpc.map((c, i) => ({ value: [c, bPos[i], bClicks[i]], date: aprDates[i] }));
+  const sData = sCpc.map((c, i) => ({ value: [c, sPos[i], sClicks[i]], date: aprDates[i] }));
+  sc.setOption({
+    tooltip: {
+      backgroundColor: '#fff', borderColor: T.border, borderWidth: 1,
+      textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+      extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12); border-radius: 10px;',
+      formatter: p => `<b>${p.data.date}.2026</b> · ${p.seriesName}<br/>
+        CPC: <b>${ruNum(Math.round(p.data.value[0]))} ₽</b><br/>
+        Позиция: <b>${p.data.value[1].toFixed(2)}</b><br/>
+        Клики: <b>${p.data.value[2]}</b>`
+    },
+    legend: { show: false },
+    grid: gridBase({ left: 60, right: 28, top: 16, bottom: 50 }),
+    xAxis: Object.assign({ type: 'value', name: 'CPC, ₽', nameLocation: 'middle', nameGap: 28, nameTextStyle: { color: T.text3, fontSize: 11, fontFamily: 'Inter' }, scale: true, axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11, formatter: v => ruNum(v) }}, axBase()),
+    yAxis: Object.assign({ type: 'value', name: 'Позиция (выше = лучше)', nameTextStyle: { color: T.text3, fontSize: 11, fontFamily: 'Inter' }, inverse: true, scale: true, axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11, formatter: v => v.toFixed(1) }}, axBase()),
+    series: [
+      {
+        name: 'Барби', type: 'scatter', data: bData,
+        symbolSize: d => Math.max(8, Math.sqrt(d[2]) * 3),
+        itemStyle: { color: T.barbie, opacity: 0.65, borderColor: T.barbie, borderWidth: 1.5 },
+        markPoint: {
+          symbolSize: 0,
+          label: { fontSize: 11, fontFamily: 'Inter', fontWeight: 600, color: T.barbie, backgroundColor: '#fff', padding: [4,7], borderRadius: 6, borderColor: T.barbie, borderWidth: 1 },
+          data: [{ coord: [403, 3.35], value: 'ø Барби · 403 ₽ / 3,35', label: { position: 'bottom', distance: 12 }}]
+        }
+      },
+      {
+        name: 'Спальня', type: 'scatter', data: sData,
+        symbolSize: d => Math.max(8, Math.sqrt(d[2]) * 3),
+        itemStyle: { color: T.spalnya, opacity: 0.65, borderColor: T.spalnya, borderWidth: 1.5 },
+        markPoint: {
+          symbolSize: 0,
+          label: { fontSize: 11, fontFamily: 'Inter', fontWeight: 600, color: T.spalnya, backgroundColor: '#fff', padding: [4,7], borderRadius: 6, borderColor: T.spalnya, borderWidth: 1 },
+          data: [{ coord: [733, 2.49], value: 'ø Спальня · 733 ₽ / 2,49', label: { position: 'top', distance: 12 }}]
+        }
+      }
+    ]
+  });
+
+  // Median + min/max helper
+  function dailyStats(arr) {
+    const sorted = [...arr].sort((a,b) => a - b);
+    const n = sorted.length;
+    const median = n % 2 ? sorted[Math.floor(n/2)] : (sorted[n/2 - 1] + sorted[n/2]) / 2;
+    return { min: sorted[0], median, max: sorted[n - 1] };
+  }
+
+  // Generic 2-line compare chart with central-tendency markers
+  function dualCompare(id, bData, sData, bMark, sMark, opts={}) {
+    const fmtY  = opts.fmtY  || (v => v);
+    const fmtMark = opts.fmtMark || (v => v);
+    const prefix = opts.markPrefix || 'ø';
+    const c = echarts.init(document.getElementById(id));
+    c.setOption({
+      tooltip: Object.assign({}, ttBase(), {
+        formatter: params => {
+          const d = params[0].axisValue;
+          let s = `<b style="font-size:13px;">${d}.2026</b><br/>`;
+          params.forEach(p => {
+            s += `<span style="display:inline-block; width:8px; height:8px; background:${p.color}; border-radius:2px; margin-right:6px;"></span>${p.seriesName}: <b>${fmtY(p.value)}</b><br/>`;
+          });
+          return s;
+        }
+      }),
+      legend: { show: false },
+      grid: gridBase({ left: opts.leftGrid || 50, right: 24, top: 16, bottom: 26 }),
+      xAxis: Object.assign({ type: 'category', data: aprDates, boundaryGap: false }, axBase()),
+      yAxis: Object.assign({ type: 'value', scale: true, axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11, formatter: opts.fmtAxis || fmtY }}, axBase()),
+      series: [
+        {
+          name: 'Барби', type: 'line', data: bData, smooth: true, symbol: 'circle', symbolSize: 4,
+          lineStyle: { color: T.barbie, width: 2 },
+          itemStyle: { color: T.barbie, borderColor: '#fff', borderWidth: 1.5 },
+          areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1, [{ offset: 0, color: T.barbie + '1f' }, { offset: 1, color: T.barbie + '00' }]) },
+          markLine: {
+            silent: true, symbol: 'none',
+            data: [{
+              yAxis: bMark, lineStyle: { color: T.barbie, type: [4,4], width: 1 },
+              label: { show: true, formatter: 'Барби ' + prefix + ' ' + fmtMark(bMark), fontSize: 10, color: T.barbie, position: 'insideStartTop', backgroundColor: '#fff', padding: [2,5], borderRadius: 4, borderColor: T.barbie, borderWidth: 1 }
+            }]
+          }
+        },
+        {
+          name: 'Спальня', type: 'line', data: sData, smooth: true, symbol: 'circle', symbolSize: 4,
+          lineStyle: { color: T.spalnya, width: 2 },
+          itemStyle: { color: T.spalnya, borderColor: '#fff', borderWidth: 1.5 },
+          areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1, [{ offset: 0, color: T.spalnya + '1f' }, { offset: 1, color: T.spalnya + '00' }]) },
+          markLine: {
+            silent: true, symbol: 'none',
+            data: [{
+              yAxis: sMark, lineStyle: { color: T.spalnya, type: [4,4], width: 1 },
+              label: { show: true, formatter: 'Спальня ' + prefix + ' ' + fmtMark(sMark), fontSize: 10, color: T.spalnya, position: 'insideEndTop', backgroundColor: '#fff', padding: [2,5], borderRadius: 4, borderColor: T.spalnya, borderWidth: 1 }
+            }]
+          }
+        }
+      ]
+    });
+  }
+
+  // CPC compare — keeps weighted average ø (it's a price metric, not a count)
+  dualCompare('chart-cpc-compare', bCpc, sCpc, 403, 733, {
+    fmtY:    v => ruNum(Math.round(v)) + ' ₽',
+    fmtAxis: v => ruNum(v) + ' ₽',
+    fmtMark: v => ruNum(v) + ' ₽',
+    markPrefix: 'ø',
+    leftGrid: 56
+  });
+
+  // Daily volume compare — uses MEDIAN (robust to outliers, matches "typical day" intuition)
+  const sSpendB  = dailyStats(bSpend),  sSpendS  = dailyStats(sSpend);
+  const sClickB  = dailyStats(bClicks), sClickS  = dailyStats(sClicks);
+  const sImprB   = dailyStats(bImpr),   sImprS   = dailyStats(sImpr);
+
+  dualCompare('chart-daily-spend',  bSpend, sSpend, sSpendB.median, sSpendS.median, {
+    fmtY:    v => ruNum(Math.round(v)) + ' ₽',
+    fmtAxis: v => v >= 1000 ? (v/1000) + 'к' : v,
+    fmtMark: v => ruNum(Math.round(v)) + ' ₽',
+    markPrefix: 'мед',
+    leftGrid: 50
+  });
+
+  dualCompare('chart-daily-clicks', bClicks, sClicks, sClickB.median, sClickS.median, {
+    fmtY:    v => v + ' кл.',
+    fmtAxis: v => v,
+    fmtMark: v => Math.round(v),
+    markPrefix: 'мед',
+    leftGrid: 40
+  });
+
+  dualCompare('chart-daily-impr',   bImpr,  sImpr,  sImprB.median, sImprS.median, {
+    fmtY:    v => ruNum(v) + ' пок.',
+    fmtAxis: v => v,
+    fmtMark: v => Math.round(v),
+    markPrefix: 'мед',
+    leftGrid: 40
+  });
+
+  // Populate stats footers
+  const statsPill = (label, color, stats, fmt) =>
+    `<span class="pill" style="--c: ${color}">${label}: <b>${fmt(stats.min)}<span class="sep"> · </span>${fmt(stats.median)}<span class="sep"> · </span>${fmt(stats.max)}</b></span>`;
+
+  const fmtRub = v => ruNum(Math.round(v)) + ' ₽';
+  const fmtInt = v => String(Math.round(v));
+
+  document.getElementById('stats-spend').innerHTML =
+    statsPill('Барби',   T.barbie,  sSpendB, fmtRub) +
+    statsPill('Спальня', T.spalnya, sSpendS, fmtRub);
+
+  document.getElementById('stats-clicks').innerHTML =
+    statsPill('Барби',   T.barbie,  sClickB, fmtInt) +
+    statsPill('Спальня', T.spalnya, sClickS, fmtInt);
+
+  document.getElementById('stats-impr').innerHTML =
+    statsPill('Барби',   T.barbie,  sImprB, fmtInt) +
+    statsPill('Спальня', T.spalnya, sImprS, fmtInt);
+}
+
+/* ════════════════════════════════════════════ */
+/* ═══════════════ TAB 3 CHARTS (Kaliningrad) ═ */
+/* ════════════════════════════════════════════ */
+function initKaliningradTab() {
+  const T_AMBER = '#f59e0b';
+  const T_GRAY  = '#cbd5e1';
+  const ruN = n => new Intl.NumberFormat('ru-RU').format(n);
+
+  // Sparklines (with anomaly mark on 22.04 = index 21)
+  function kSpark(id, data, color) {
+    const el = document.getElementById(id); if (!el) return;
+    const c = echarts.init(el, null, { renderer: 'svg' });
+    c.setOption({
+      grid: { left: 0, right: 0, top: 2, bottom: 0 },
+      xAxis: { type: 'category', show: false, data: kDates },
+      yAxis: { type: 'value', show: false, scale: true },
+      series: [{
+        type: 'line', data, smooth: true, symbol: 'none',
+        lineStyle: { color, width: 1.6 },
+        areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1,[
+          { offset:0, color: color+'55' }, { offset:1, color: color+'00' }
+        ])},
+        markLine: {
+          silent: true, symbol: 'none',
+          lineStyle: { color: T.bad, type: 'dashed', width: 1, opacity: 0.5 },
+          data: [{ xAxis: 21, label: { show: false } }]
+        }
+      }]
+    });
+  }
+  kSpark('k-sp-spend',  kSpend,  T.primary);
+  kSpark('k-sp-clicks', kClicks, T.good);
+  kSpark('k-sp-pos',    kPos,    T.warn);
+  kSpark('k-sp-reach',  kReach,  T.spalnya);
+
+  // DONUT — placement budget share
+  const donut = echarts.init(document.getElementById('k-chart-donut'));
+  donut.setOption({
+    tooltip: {
+      backgroundColor: '#fff', borderColor: T.border, borderWidth: 1,
+      textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+      extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12); border-radius: 10px;',
+      formatter: p => `<b>${p.name}</b><br/>${ruN(Math.round(p.value))} ₽ · ${p.percent}% бюджета`
+    },
+    series: [{
+      type: 'pie', radius: ['58%','78%'], center: ['50%','50%'],
+      avoidLabelOverlap: true,
+      itemStyle: { borderColor: '#fff', borderWidth: 4, borderRadius: 6 },
+      label: {
+        show: true, position: 'center',
+        formatter: () => `{a|95%}\n{b|в премиум-блок}\n{c|спец + эксклюзив}`,
+        rich: {
+          a: { fontSize: 28, fontWeight: 700, color: T.primary, fontFamily: 'Inter', lineHeight: 32, padding: [0,0,2,0] },
+          b: { fontSize: 13, color: T.text3, fontFamily: 'Inter', lineHeight: 16 },
+          c: { fontSize: 11, color: T.text2, fontFamily: 'Inter', fontWeight: 500, lineHeight: 18, padding: [4,0,0,0] }
+        }
+      },
+      labelLine: { show: false },
+      data: [
+        { value: 143679, name: 'Спецразмещение',    itemStyle: { color: T.primary }},
+        { value: 37687,  name: 'Эксклюзивное',      itemStyle: { color: T_AMBER }},
+        { value: 9394,   name: 'Прочее',            itemStyle: { color: T.violet }},
+        { value: 0.01,   name: 'Динамические места',itemStyle: { color: T_GRAY }}
+      ]
+    }]
+  });
+
+  // STACKED DAILY CHART — impressions by placement
+  const stack = echarts.init(document.getElementById('k-chart-daily-stack'));
+  stack.setOption({
+    tooltip: {
+      trigger: 'axis', axisPointer: { type: 'shadow' },
+      backgroundColor: '#fff', borderColor: T.border, borderWidth: 1,
+      textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+      extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12); border-radius: 10px;',
+      formatter: params => {
+        const lbl = params[0].axisValue;
+        let total = 0;
+        let s = `<b style="font-size:13px;">${lbl}.2026</b><br/>`;
+        params.forEach(p => {
+          if (!p.value) return;
+          total += p.value;
+          s += `<span style="display:inline-block; width:8px; height:8px; background:${p.color}; border-radius:2px; margin-right:6px;"></span>${p.seriesName}: <b>${p.value}</b><br/>`;
+        });
+        s += `<div style="margin-top:6px; padding-top:6px; border-top:1px solid ${T.border}; font-size:11.5px; color:${T.text3};">Всего: <b style="color:${T.text}">${total}</b> показов</div>`;
+        return s;
+      }
+    },
+    grid: gridBase({ left: 44, right: 16, top: 16, bottom: 28 }),
+    xAxis: Object.assign({ type: 'category', data: kDates, boundaryGap: true }, axBase()),
+    yAxis: Object.assign({ type: 'value', axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11 }}, axBase()),
+    series: [
+      { name: 'Динам.',   type: 'bar', stack: 'p', data: kDyn,
+        barWidth: '60%', itemStyle: { color: T_GRAY }},
+      { name: 'Прочее',   type: 'bar', stack: 'p', data: kOther,
+        itemStyle: { color: T.violet }},
+      { name: 'Эксклюз.', type: 'bar', stack: 'p', data: kExcl,
+        itemStyle: { color: T_AMBER }},
+      { name: 'Спец',     type: 'bar', stack: 'p', data: kSpec,
+        itemStyle: { color: T.primary, borderRadius: [4,4,0,0] },
+        markLine: {
+          silent: true, symbol: 'none',
+          lineStyle: { color: T.bad, type: 'dashed', width: 1.2 },
+          data: [{ xAxis: kDates[21],
+            label: { show: true, formatter: '22 апр\nпровал', color: T.bad, fontSize: 10.5, fontFamily: 'Inter', fontWeight: 600, lineHeight: 13, position: 'insideEndTop', backgroundColor: '#fff', padding: [3,5], borderRadius: 4, borderColor: T.bad, borderWidth: 1 }
+          }]
+        }
+      }
+    ]
+  });
+
+  // MAIN COMBO — daily spend + clicks
+  const main = echarts.init(document.getElementById('k-chart-main'));
+  main.setOption({
+    tooltip: ttBase(),
+    grid: gridBase({ left: 56, right: 50, top: 14, bottom: 28 }),
+    xAxis: Object.assign({ type: 'category', data: kDates, boundaryGap: true }, axBase()),
+    yAxis: [
+      Object.assign({ type: 'value', axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11, formatter: v => v >= 1000 ? (v/1000)+'к' : v }}, axBase()),
+      Object.assign({ type: 'value', position: 'right', splitLine: { show: false }, axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11 }}, axBase())
+    ],
+    series: [
+      {
+        name: 'Расход', type: 'bar', yAxisIndex: 0, data: kSpend,
+        barWidth: '55%',
+        itemStyle: { color: p => p.dataIndex === 21 ? T.bad : T.primary, borderRadius: [4,4,0,0], opacity: 0.85 },
+        markLine: {
+          silent: true, symbol: 'none',
+          lineStyle: { color: T.bad, type: 'dashed', width: 1.2 },
+          data: [{ xAxis: kDates[21],
+            label: { show: true, formatter: '22 апр · провал', color: T.bad, fontSize: 10.5, fontFamily: 'Inter', fontWeight: 600, position: 'insideEndTop', distance: 6, backgroundColor: '#fff', padding: [3,5], borderRadius: 4, borderColor: T.bad, borderWidth: 1 }
+          }]
+        },
+        markPoint: {
+          symbolSize: 0,
+          label: { fontSize: 10.5, fontFamily: 'Inter', fontWeight: 600, backgroundColor: '#fff', padding: [4,6], borderRadius: 6, borderColor: T.border, borderWidth: 1, distance: 8 },
+          data: [{ coord: [kDates[13], 11154], value: 'ø 7 065 ₽/день', itemStyle: { color: T.primary }, label: { color: T.primary, position: 'top' }}]
+        }
+      },
+      {
+        name: 'Клики', type: 'line', yAxisIndex: 1, data: kClicks,
+        smooth: true, symbol: 'circle', symbolSize: 4,
+        lineStyle: { color: T.good, width: 2 },
+        itemStyle: { color: T.good, borderColor: '#fff', borderWidth: 2 }
+      }
+    ]
+  });
+
+  // QUERY GROUPS — horizontal bar with CPC line
+  const groups = echarts.init(document.getElementById('k-chart-groups'));
+  const sortedGroups = kGroups.slice().sort((a,b) => a.spend - b.spend);
+  groups.setOption({
+    tooltip: {
+      trigger: 'axis', axisPointer: { type: 'shadow' },
+      backgroundColor: '#fff', borderColor: T.border, borderWidth: 1,
+      textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+      extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12); border-radius: 10px;',
+      formatter: params => {
+        const lbl = params[0].axisValue;
+        const grp = sortedGroups.find(g => g.name === lbl);
+        if (!grp) return '';
+        return `<b style="font-size:13px;">${lbl}</b><br/>
+          Расход: <b>${ruN(grp.spend)} ₽</b><br/>
+          Клики: <b>${grp.clicks}</b><br/>
+          CPC: <b>${grp.cpc} ₽</b>`;
+      }
+    },
+    grid: gridBase({ left: 170, right: 60, top: 16, bottom: 28 }),
+    xAxis: Object.assign({ type: 'value', axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11, formatter: v => v >= 1000 ? (v/1000)+'к' : v }}, axBase()),
+    yAxis: Object.assign({ type: 'category', data: sortedGroups.map(g => g.name), axisLabel: { color: T.text2, fontFamily: 'Inter', fontSize: 12, fontWeight: 500 }}, axBase()),
+    series: [
+      {
+        type: 'bar', data: sortedGroups.map(g => g.spend),
+        barWidth: 18,
+        itemStyle: {
+          color: function(p) {
+            const cpc = sortedGroups[p.dataIndex].cpc;
+            // green-yellow-red scale by CPC
+            if (cpc < 300) return T.good;
+            if (cpc < 500) return T.primary;
+            if (cpc < 600) return T.warn;
+            return T.bad;
+          },
+          borderRadius: [0,4,4,0]
+        },
+        label: {
+          show: true, position: 'right',
+          formatter: function(p) {
+            const g = sortedGroups[p.dataIndex];
+            return `${ruN(g.spend)} ₽ · CPC ${g.cpc}`;
+          },
+          color: T.text2, fontFamily: 'Inter', fontSize: 11, fontWeight: 500
+        }
+      }
+    ]
+  });
+
+  // QUERIES TABLE
+  const qBody = document.getElementById('k-queries-body');
+  const maxSpend = kTopQueries[0].spend;
+  kTopQueries.forEach((q, i) => {
+    const tr = document.createElement('tr');
+    const w = (q.spend / maxSpend * 100).toFixed(0);
+    const cpcCls = q.cpc > 700 ? 'cpc-high' : '';
+    tr.innerHTML = `
+      <td class="q-rank">${i+1}</td>
+      <td class="q-cell">${q.q}<span class="bar"><span class="bar-fill" style="width:${w}%;"></span></span></td>
+      <td class="num">${ruN(q.spend)}&nbsp;₽</td>
+      <td class="num">${q.clicks}</td>
+      <td class="num ${cpcCls}">${q.cpc}&nbsp;₽</td>
+    `;
+    qBody.appendChild(tr);
+  });
+
+  // DAILY TABLE
+  const tbody = document.getElementById('k-daily-table');
+  kDates.forEach((d, i) => {
+    const tr = document.createElement('tr');
+    const isAnomaly = (i === 21);
+    const dayClass = 'p2'; // single style for kal
+    tr.innerHTML = `
+      <td>
+        <div class="day-cell">
+          <div class="day-icon ${dayClass}" style="${isAnomaly ? 'background: var(--bad-wash); color: var(--bad);' : ''}">${d.split('.')[0]}</div>
+          <div>
+            <div class="day-name">${d}.2026${isAnomaly ? ' <span style="color: var(--bad); font-size: 11px; font-weight: 600;">провал</span>' : ''}</div>
+            <div class="day-meta">день ${i+1}</div>
+          </div>
+        </div>
+      </td>
+      <td class="num">${ruN(kSpend[i].toFixed(0))}</td>
+      <td class="num muted">${ruN(kImpr[i])}</td>
+      <td class="num muted">${kSpec[i]}</td>
+      <td class="num muted">${kExcl[i]}</td>
+      <td class="num">${kClicks[i]}</td>
+      <td class="num">${ruN(Math.round(kCpc[i]))}</td>
+      <td class="num muted">${kPos[i].toFixed(2)}</td>
+      <td class="num muted">${kCtr[i].toFixed(1)}</td>
+      <td class="num">${kReach[i]}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+/* ════════════════════════════════════════════ */
+/* ═══════════════ TAB 4: SEO  ════════════════ */
+/* ════════════════════════════════════════════ */
+const seoWeeks       = ['02.03', '09.03', '16.03', '23.03', '30.03', '06.04', '13.04', '20.04'];
+const seoWeekRanges  = ['02.03 — 08.03','09.03 — 15.03','16.03 — 22.03','23.03 — 29.03','30.03 — 05.04','06.04 — 12.04','13.04 — 19.04','20.04 — 26.04'];
+const seoYandex      = [89, 94, 80, 68, 90, 77, 111, 128];
+const seoGoogle      = [133, 134, 113, 128, 154, 148, 161, 172];
+const seoTotal       = [224, 231, 194, 197, 245, 225, 272, 302];
+
+const SEO_START_IDX  = 4; // start of week of 30.03 (April 1 falls inside this week)
+
+function initSeoTab() {
+  const T_YANDEX = '#f59e0b';
+  const T_GOOGLE = T.primary;
+  const ruN = n => new Intl.NumberFormat('ru-RU').format(n);
+
+  // Sparklines for KPI
+  function seoSpark(id, data, color) {
+    const el = document.getElementById(id); if (!el) return;
+    const c = echarts.init(el, null, { renderer: 'svg' });
+    c.setOption({
+      grid: { left: 0, right: 0, top: 2, bottom: 0 },
+      xAxis: { type: 'category', show: false, data: seoWeeks },
+      yAxis: { type: 'value', show: false, scale: true },
+      series: [{
+        type: 'line', data, smooth: true, symbol: 'none',
+        lineStyle: { color, width: 1.6 },
+        areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1,[
+          { offset:0, color: color+'55' }, { offset:1, color: color+'00' }
+        ])},
+        markLine: {
+          silent: true, symbol: 'none',
+          lineStyle: { color: T.primary, type: 'dashed', width: 1, opacity: 0.5 },
+          data: [{ xAxis: SEO_START_IDX, label: { show: false } }]
+        }
+      }]
+    });
+  }
+  seoSpark('seo-sp-total',  seoTotal,  T.primary);
+  seoSpark('seo-sp-april',  seoTotal,  T.good);
+  seoSpark('seo-sp-yandex', seoYandex, T_YANDEX);
+  seoSpark('seo-sp-google', seoGoogle, T_GOOGLE);
+
+  // TRAFFIC TREND CHART — stacked area, Yandex bottom + Google top
+  const trafficChart = echarts.init(document.getElementById('seo-chart-traffic'));
+  trafficChart.setOption({
+    tooltip: {
+      trigger: 'axis',
+      backgroundColor: '#fff', borderColor: T.border, borderWidth: 1,
+      textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+      extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12); border-radius: 10px;',
+      formatter: params => {
+        const idx = params[0].dataIndex;
+        const yandex = seoYandex[idx];
+        const google = seoGoogle[idx];
+        const total  = seoTotal[idx];
+        const yPct = (yandex/total*100).toFixed(0);
+        const gPct = (google/total*100).toFixed(0);
+        const baseline = 211;
+        const delta = ((total - baseline) / baseline * 100).toFixed(0);
+        const deltaClr = total > baseline ? T.good : T.text3;
+        const deltaSign = total > baseline ? '+' : '';
+        return `<b style="font-size:13px;">Неделя ${seoWeekRanges[idx]}</b>
+          <div style="margin: 6px 0 4px; font-size: 16px; font-weight: 600; color: ${T.text};">${total} визитов</div>
+          <span style="display:inline-block; width:8px; height:8px; background:${T_YANDEX}; border-radius:2px; margin-right:6px;"></span>Яндекс: <b>${yandex}</b> (${yPct}%)<br/>
+          <span style="display:inline-block; width:8px; height:8px; background:${T_GOOGLE}; border-radius:2px; margin-right:6px;"></span>Google: <b>${google}</b> (${gPct}%)
+          <div style="margin-top:6px; padding-top:6px; border-top:1px solid ${T.border}; font-size:11.5px; color:${T.text3};">vs март-среднее (211): <b style="color:${deltaClr}">${deltaSign}${delta}%</b></div>`;
+      }
+    },
+    legend: { show: false },
+    grid: gridBase({ left: 50, right: 30, top: 16, bottom: 30 }),
+    xAxis: Object.assign({ type: 'category', data: seoWeeks, boundaryGap: false }, axBase()),
+    yAxis: Object.assign({ type: 'value', axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11, formatter: v => v }}, axBase()),
+    series: [
+      {
+        name: 'Яндекс', type: 'line', data: seoYandex, stack: 'visits',
+        smooth: true, symbol: 'circle', symbolSize: 5,
+        lineStyle: { color: T_YANDEX, width: 2 },
+        itemStyle: { color: T_YANDEX, borderColor: '#fff', borderWidth: 2 },
+        areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1, [
+          { offset: 0, color: T_YANDEX + 'aa' }, { offset: 1, color: T_YANDEX + '55' }
+        ])},
+        markArea: {
+          silent: true,
+          itemStyle: { color: 'rgba(0,0,0,0.025)' },
+          data: [[
+            { xAxis: seoWeeks[0] }, { xAxis: seoWeeks[3] }
+          ]]
+        }
+      },
+      {
+        name: 'Google', type: 'line', data: seoGoogle, stack: 'visits',
+        smooth: true, symbol: 'circle', symbolSize: 5,
+        lineStyle: { color: T_GOOGLE, width: 2 },
+        itemStyle: { color: T_GOOGLE, borderColor: '#fff', borderWidth: 2 },
+        areaStyle: { color: new echarts.graphic.LinearGradient(0,0,0,1, [
+          { offset: 0, color: T_GOOGLE + 'aa' }, { offset: 1, color: T_GOOGLE + '55' }
+        ])},
+        markLine: {
+          silent: true, symbol: 'none',
+          data: [{
+            xAxis: seoWeeks[SEO_START_IDX],
+            lineStyle: { color: T.primary, type: 'dashed', width: 1.5 },
+            label: { show: true, formatter: 'старт SEO\n1 апреля', color: T.primary, fontSize: 10.5, fontFamily: 'Inter', fontWeight: 600, lineHeight: 13, position: 'insideEndTop', distance: 6, backgroundColor: '#fff', padding: [4,6], borderRadius: 6, borderColor: T.primary, borderWidth: 1 }
+          }]
+        },
+        markPoint: {
+          symbolSize: 0,
+          label: { fontSize: 11, fontFamily: 'Inter', fontWeight: 600, color: T.good, backgroundColor: '#fff', padding: [4,7], borderRadius: 6, borderColor: T.good, borderWidth: 1 },
+          data: [
+            { coord: [seoWeeks[7], seoTotal[7]], value: 'рекорд · 302', label: { position: 'top', distance: 14 }}
+          ]
+        }
+      }
+    ]
+  });
+
+  // ─── POSITIONS: TIER DISTRIBUTION (Yandex/Google × before/after) ───
+  // Tiers: топ-3, топ 4-10, топ 11-20, нет в топ-100
+  const tierData = {
+    yBefore: [38, 6,  0, 52],
+    yAfter:  [68, 13, 2, 13],
+    gBefore: [13, 28, 1, 54],
+    gAfter:  [37, 31, 8, 20]   // 37+31+8+20=96 (включает 1 запрос в топ 21-50, объединённый с топ 11-20 для визуала)
+  };
+  const tierColors = ['#10b981', '#7C5CFF', '#a8c4f5', '#d1d5db'];
+  const tierNames  = ['Топ-3', 'Топ 4–10', 'Топ 11–20', 'Не в топ-100'];
+
+  const tierChart = echarts.init(document.getElementById('seo-chart-tiers'));
+  tierChart.setOption({
+    tooltip: {
+      trigger: 'axis', axisPointer: { type: 'shadow' },
+      backgroundColor: '#fff', borderColor: T.border, borderWidth: 1,
+      textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+      extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12); border-radius: 10px;',
+      formatter: params => {
+        const lbl = params[0].axisValue;
+        let s = `<b style="font-size:13px;">${lbl}</b><br/>`;
+        params.forEach(p => {
+          if (!p.value) return;
+          s += `<span style="display:inline-block; width:8px; height:8px; background:${p.color}; border-radius:2px; margin-right:6px;"></span>${p.seriesName}: <b>${p.value}</b> запросов<br/>`;
+        });
+        return s;
+      }
+    },
+    legend: {
+      bottom: 0, icon: 'roundRect', itemWidth: 12, itemHeight: 8,
+      textStyle: { color: T.text2, fontFamily: 'Inter', fontSize: 12 }
+    },
+    grid: gridBase({ left: 90, right: 30, top: 16, bottom: 56 }),
+    xAxis: Object.assign({ type: 'value', max: 96, axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11 }}, axBase()),
+    yAxis: Object.assign({ type: 'category', data: ['Google · после', 'Google · до', 'Яндекс · после', 'Яндекс · до'], axisLabel: { color: T.text2, fontFamily: 'Inter', fontSize: 12, fontWeight: 500 }}, axBase()),
+    series: tierNames.map((name, i) => ({
+      name,
+      type: 'bar',
+      stack: 'total',
+      barWidth: 22,
+      data: [
+        tierData.gAfter[i],
+        tierData.gBefore[i],
+        tierData.yAfter[i],
+        tierData.yBefore[i]
+      ],
+      itemStyle: { color: tierColors[i] },
+      label: {
+        show: true, position: 'inside', color: 'white',
+        fontFamily: 'Inter', fontSize: 11, fontWeight: 600,
+        formatter: p => p.value > 4 ? p.value : ''
+      }
+    }))
+  });
+
+  // ─── POSITIONS: GROUPS BREAKDOWN ───
+  // For each group: % in top-10 before vs after
+  const groupNames = ['Эротический массаж', 'Нуру массаж', 'Сч. конец', 'Веточка сакуры', 'Для пар', 'В 4 руки'];
+  const groupSizes = [47, 9, 10, 9, 11, 10];
+  const groupYBefore = [44, 0, 0, 0, 0, 0]; // count in top-10
+  const groupYAfter  = [45, 5, 10, 9, 6, 6];
+  const groupGBefore = [41, 0, 0, 0, 0, 0];
+  const groupGAfter  = [38, 6, 9, 3, 6, 6];
+
+  // Convert to percentages
+  const toPct = (counts) => counts.map((c, i) => Math.round(c / groupSizes[i] * 100));
+  const gpYBefore = toPct(groupYBefore);
+  const gpYAfter  = toPct(groupYAfter);
+  const gpGBefore = toPct(groupGBefore);
+  const gpGAfter  = toPct(groupGAfter);
+
+  function groupChart(id, before, after, color, system) {
+    const chart = echarts.init(document.getElementById(id));
+    chart.setOption({
+      tooltip: {
+        trigger: 'axis', axisPointer: { type: 'shadow' },
+        backgroundColor: '#fff', borderColor: T.border, borderWidth: 1,
+        textStyle: { color: T.text, fontFamily: 'Inter', fontSize: 12 },
+        extraCssText: 'box-shadow: 0 8px 24px rgba(80,68,128,0.12); border-radius: 10px;',
+        formatter: params => {
+          const idx = params[0].dataIndex;
+          const grpSize = groupSizes[idx];
+          const cBefore = system === 'y' ? groupYBefore[idx] : groupGBefore[idx];
+          const cAfter  = system === 'y' ? groupYAfter[idx]  : groupGAfter[idx];
+          return `<b style="font-size:13px;">${params[0].axisValue}</b> · ${grpSize} запросов<br/>
+            <span style="color:${T.text3};">До:</span> <b>${cBefore} в топ-10</b> (${before[idx]}%)<br/>
+            <span style="color:${color};">После:</span> <b>${cAfter} в топ-10</b> (${after[idx]}%)<br/>
+            <div style="margin-top:4px; padding-top:4px; border-top:1px solid ${T.border}; font-size:11.5px; color:${T.good}; font-weight:600;">+${after[idx] - before[idx]} п.п.</div>`;
+        }
+      },
+      grid: gridBase({ left: 130, right: 50, top: 16, bottom: 28 }),
+      xAxis: Object.assign({ type: 'value', max: 100, axisLabel: { color: T.text3, fontFamily: 'Inter', fontSize: 11, formatter: v => v + '%' }}, axBase()),
+      yAxis: Object.assign({ type: 'category', data: groupNames, axisLabel: { color: T.text2, fontFamily: 'Inter', fontSize: 12, fontWeight: 500 }, inverse: true }, axBase()),
+      series: [
+        {
+          name: 'До', type: 'bar', data: before,
+          barWidth: 10,
+          itemStyle: { color: '#d1d5db', borderRadius: [0,3,3,0] }
+        },
+        {
+          name: 'После', type: 'bar', data: after,
+          barWidth: 10,
+          barGap: '20%',
+          itemStyle: { color: color, borderRadius: [0,3,3,0] },
+          label: {
+            show: true, position: 'right',
+            color: T.text, fontFamily: 'Inter', fontSize: 11, fontWeight: 600,
+            formatter: p => p.value + '%'
+          }
+        }
+      ]
+    });
+  }
+
+  groupChart('seo-chart-groups-y', gpYBefore, gpYAfter, '#f59e0b', 'y');
+  groupChart('seo-chart-groups-g', gpGBefore, gpGAfter, T.primary, 'g');
+
+  // ─── TOP-15 GAINERS TABLE ───
+  const gainers = [
+    { q: 'секс салон',                                            sys: 'y', from: 101, to: 1 },
+    { q: 'массаж со счастливым концом калининград',               sys: 'y', from: 101, to: 1 },
+    { q: 'эротический массаж со счастливым концом калининград',   sys: 'y', from: 101, to: 1 },
+    { q: 'хеппи энд массаж калининград',                          sys: 'y', from: 101, to: 1 },
+    { q: 'массаж веточка сакуры салон калининград',               sys: 'y', from: 101, to: 1 },
+    { q: 'веточка сакуры массаж салон',                           sys: 'y', from: 101, to: 1 },
+    { q: 'салон эротического массажа в 4 руки калининград',       sys: 'y', from: 101, to: 1 },
+    { q: 'массаж со счастливым концом калининград',               sys: 'g', from: 101, to: 1 },
+    { q: 'эротический массаж в четыре руки калининград',          sys: 'g', from: 101, to: 1 },
+    { q: 'эротический массаж в 4 руки салон калининград',         sys: 'g', from: 101, to: 1 },
+    { q: 'интим массаж в 4 руки калининград',                     sys: 'g', from: 101, to: 1 },
+    { q: 'нуру массаж салон калининград',                         sys: 'y', from: 101, to: 2 },
+    { q: 'массаж с счастливым концом калининград',                sys: 'g', from: 101, to: 1 },
+    { q: 'нуру массаж калининград',                               sys: 'g', from: 101, to: 2 },
+    { q: 'эротический нуру массаж калининград',                   sys: 'g', from: 101, to: 2 }
+  ];
+
+  const gBody = document.getElementById('seo-gainers-body');
+  gainers.forEach(g => {
+    const gain = g.from - g.to;
+    const sysLabel = g.sys === 'y' ? 'Яндекс' : 'Google';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="q">${g.q}</td>
+      <td><span class="system ${g.sys}">${sysLabel}</span></td>
+      <td class="pos-shift"><span class="from">${g.from === 101 ? 'нет в топ-100' : g.from}</span></td>
+      <td class="pos-shift"><span class="arrow">→</span></td>
+      <td class="pos-shift"><span class="to">${g.to}</span></td>
+      <td class="gain">+${gain} поз.</td>
+    `;
+    gBody.appendChild(tr);
+  });
+}
+
+/* ════════════════════════════════════════════ */
+/* ═══════════════ TAB SWITCHING ══════════════ */
+/* ════════════════════════════════════════════ */
+const VALID_TABS = ['strategy', 'compare', 'kaliningrad', 'seo'];
+const STORAGE_KEY = 'di-active-tab';
+
+const initialized = { strategy: false, compare: false, kaliningrad: false, seo: false };
+const initFns = { strategy: initStrategyTab, compare: initCompareTab, kaliningrad: initKaliningradTab, seo: initSeoTab };
+const periodTexts = {
+  strategy:    '25.03 — 22.04.2026 · 29 дней · Красноярск',
+  compare:     '01.04 — 27.04.2026 · 27 дней · Красноярск',
+  kaliningrad: '01.04 — 27.04.2026 · 27 дней · Калининград',
+  seo:         '02.03 — 26.04.2026 · 8 недель · barbie-salon.ru'
+};
+
+// Resolve initial tab: URL hash → localStorage → default
+function getInitialTab() {
+  const hash = location.hash.replace('#', '');
+  if (VALID_TABS.includes(hash)) return hash;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (VALID_TABS.includes(stored)) return stored;
+  } catch (_) { /* localStorage may be blocked — silently fall through */ }
+  return 'strategy';
+}
+
+function activateTab(name, opts = {}) {
+  if (!VALID_TABS.includes(name)) name = 'strategy';
+
+  document.querySelectorAll('.tab-nav .tab').forEach(t => {
+    const isActive = t.dataset.tab === name;
+    t.classList.toggle('active', isActive);
+    t.setAttribute('aria-selected', isActive);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.toggle('active', p.dataset.panel === name);
+  });
+  document.getElementById('period-text').textContent = periodTexts[name];
+
+  // Persist
+  try { localStorage.setItem(STORAGE_KEY, name); } catch (_) {}
+  if (!opts.skipHashUpdate && location.hash !== '#' + name) {
+    history.replaceState(null, '', '#' + name);
+  }
+
+  if (!initialized[name]) {
+    initialized[name] = true;
+    initFns[name]();
+  } else {
+    requestAnimationFrame(() => {
+      document.querySelectorAll(`[data-panel="${name}"] .chart, [data-panel="${name}"] .donut-chart, [data-panel="${name}"] .kpi-spark`).forEach(el => {
+        const inst = echarts.getInstanceByDom(el); if (inst) inst.resize();
+      });
+    });
+  }
+}
+
+document.querySelectorAll('.tab-nav .tab').forEach(t => {
+  t.addEventListener('click', () => activateTab(t.dataset.tab));
+});
+
+// Browser back/forward — react to hash change
+window.addEventListener('hashchange', () => {
+  const hash = location.hash.replace('#', '');
+  if (VALID_TABS.includes(hash)) activateTab(hash, { skipHashUpdate: true });
+});
+
+// Init: restore last active tab from URL or localStorage
+activateTab(getInitialTab(), { skipHashUpdate: !location.hash });
+
+// Resize all chart instances on window resize
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.chart, .donut-chart, .kpi-spark').forEach(el => {
+    const inst = echarts.getInstanceByDom(el); if (inst) inst.resize();
+  });
+});
+</script>
+</body>
+</html>
